@@ -1,0 +1,13 @@
+<div class="outer padtop-5 padbot-8">
+    <div class="inner">
+      <div class="poster animated"*ngFor='let actor of actors' >
+          <a routerLink="/actor" (click)="setSelectedActorId(actor.id)">
+            <img [src]="this.imgUrl+actor.profile_path" [alt]="actor.name">
+            <div class="text-block-bot">
+                <p class="title">{{actor.name}}</p>
+            </div>
+          </a>
+      </div>
+    </div>
+  </div>
+    

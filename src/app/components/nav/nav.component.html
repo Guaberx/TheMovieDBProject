@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" >
+    <a class="navbar-brand" routerLink="/">MoviesApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="movies" (click)="reloadMovies()">Movies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="actors">Actors</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="about">About</a>
+          </li> -->
+          <li class="nav-item">
+              <a class="nav-link" routerLink="contact">Contact</a>
+            </li>
+      </ul>
+      <div class="row">
+        <div class="col-10-sm" style="padding-right: 3em;">
+          <input (keydown)="keydown($event)" id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        </div>
+        <div class="col-6-sm" style="margin-right: 5em;">
+          <p (click)="this.search()" class="searchButton" >Search</p>
+          </div>
+      </div>
+      
+    </div>
+  </nav>

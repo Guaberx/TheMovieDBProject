@@ -1,1 +1,202 @@
 /* You can add global styles to this file, and also import other style files */
+
+//El color de fondo de todo el sitio
+section,html,body{
+    background-color: rgb(26, 29, 31);
+    padding: 0px auto;
+    margin: 0px auto;
+    min-height: 100vh;
+    position: relative;
+}
+
+.startbtn{
+    animation-name:appear;
+    animation-duration:1s;
+    animation-fill-mode:forwards;
+}
+.startbtn:hover{
+    cursor: pointer;
+}
+
+.startbtn{
+    position: relative;
+    bottom: 1em;
+    left: 1em;
+    background-color: rgba(255, 0, 0, .7);
+    padding-left: 20px;
+    padding-right: 2px;
+    
+    width: 10em;
+    height: 40em;
+    p{
+        color: white;
+        text-align: center;
+    }
+}
+
+.searchButton{
+    @extend .rounding;
+    cursor: pointer;
+    background-color: rgba(255,0,0,0.7);
+    height: 5vh;
+    width: auto;
+    margin: 0 auto;
+    padding: 0 auto;
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 3vh;
+}
+
+.rounding{
+    border-radius: 15px;
+}
+
+//Color de letra en todo el sitio (blanco para contrastar con el fondo)
+p{
+    color: white;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+//Color de la barra de arriba del sitio
+.navbar-dark{
+    background-color: #000000
+}
+footer{
+    background-color: #000;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+}
+
+.padtop-6{
+    padding-top: 6em;
+}
+
+.padtop-5{
+    padding-top: 5em;
+}
+
+.padbot-8{
+    padding-bottom: 8em;
+}
+
+.footer {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+//Este contiene todos los posters de las peliculas dando los margenes de forma responsive
+div.outer{
+    width:70vw;
+    margin: 0 auto;
+    // background-color: #66ffff;
+}
+
+//Este tambien contiene todos los posters pero es utilizado para centrar los posters
+div.inner{
+    display: inline-table;
+    margin: 0 auto;   
+    animation-name:appear;
+    animation-duration:1s;
+    animation-fill-mode:backwards;
+}
+
+//Todas las propiedades de cada poster o foto de persona en el sitio
+div.poster{
+    vertical-align: top;
+    display: inline-table;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 12em;
+    position: relative;
+    // border: 1px solid #CCC;
+    //Esto es para que las imagenes sean del tamaño del div
+    img{
+        border-radius: 15px;
+        border: 2px solid rgba(53, 59, 43, 0.384);
+        background-size: cover;
+        position: relative;
+        max-width:100%;
+        max-height:100%;
+        // float: left;
+        
+    }
+    p{
+        position: absolute;
+    }
+}
+
+//El texto con la puntuacion de la pelicula cuando estan todas las miniaturas
+.text-block-top {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255);
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    color: #FFD700;
+}
+
+//Color para distinguir la puntuacion
+.goldcolor{
+    color: #FFD700;
+}
+
+//El texto con el titulo de la pelicula cuando estan todas las miniaturas
+.text-block-bot {
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    background-color: rgba(0, 0, 0, .7);
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 15px;
+    width: 10em;
+    height: 4em;
+    p{
+        color: white;
+        text-align: center;
+    }
+  }
+
+//Animaciones
+div.poster.animated:hover{
+    animation-name:bigger;
+    animation-duration:1s;
+    animation-timing-function: ease;
+    animation-fill-mode:forwards;
+}
+
+div.poster.big{
+    width: 20em;    
+}
+
+@keyframes appear {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+//Efecto de crecimiento de las miniaturas al hacerles hover
+@keyframes bigger {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.2);
+    }
+    0% {
+		transform: scale(1);
+	}
+}

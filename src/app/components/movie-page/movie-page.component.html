@@ -1,0 +1,56 @@
+<div class="container padtop-6" *ngIf="this.movie">
+  <div class="row">
+    <div class="col-4-sm">
+      <div class="poster big">
+          <img [src]="this.imgUrl+this.movie.poster_path" [alt]="this.movie.imgName">
+      </div>
+    </div>
+    <div class="col">
+        <div>
+            <h3 style="color:white"><b>{{this.movie.original_title}}</b></h3>
+            <br>
+            <h3 style="color:white"><span class="goldcolor">{{this.movie.vote_average}}</span> out of 10</h3>
+            <p><b>Languages: </b><span *ngFor='let lan of this.movie.spoken_languages'>{{lan.name}} </span></p>
+            <p><b>Overview:</b></p>
+            <p>{{this.movie.overview}}</p>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- cast -->
+<div class="outer" *ngIf="this.cast">
+  <h3 style="color:white"><b>Cast:</b></h3>
+  <div class="inner">
+    <div class="poster animated" *ngFor='let actor of this.cast.cast | slice:0:5; let i = index;' >
+        <a routerLink="/actor" (click)="setSelectedActorId(actor.id)">
+          <img [src]="this.imgUrl+actor.profile_path" [alt]="actor.name">
+          <div class="text-block-bot">
+              <p class="title">{{actor.name}}</p>
+          </div>
+        </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- Similar Movies -->
+<div class="outer padbot-8" *ngIf="this.movies">
+  <h3 style="color:white"><b>You may also like:</b></h3>
+  <div class="inner">
+    <div class="poster animated"*ngFor='let movie of this.movies | slice:0:5; let i = index;'>
+        <a [routerLink]="['./']" (click)="setSelectedMovieId(movie.id)">
+          <img [src]="this.imgUrl+movie.poster_path" [alt]="movie.imgName">
+          <div class="text-block-top">
+              <h2>{{movie.vote_average}}</h2>
+          </div>
+          <div class="text-block-bot">
+            <p>{{movie.original_title}}</p>
+          </div>
+        </a>
+    </div>
+  </div>
+</div>
+
+
+<app-loading *ngIf="!(this.movie || this.movies || this.cast)"></app-loading>

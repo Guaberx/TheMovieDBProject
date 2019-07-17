@@ -1,0 +1,15 @@
+<div class="outer padtop-5 padbot-8">
+  <div class="inner">
+    <div class="poster animated"*ngFor='let movie of movies' >
+        <a routerLink="/movie" (click)="setSelectedMovieId(movie.id)">
+          <img [src]="this.imgUrl+movie.poster_path" [alt]="movie.imgName">
+          <div class="text-block-top">
+              <h2>{{movie.vote_average}}</h2>
+          </div>
+          <div class="text-block-bot">
+            <p>{{movie.original_title}}</p>
+          </div>
+        </a>
+    </div>
+  </div>
+</div>

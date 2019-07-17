@@ -1,0 +1,38 @@
+<div class="container padtop-6" *ngIf="this.actor">
+  <div class="row">
+    <div class="col-4-sm">
+      <div class="poster big">
+        <img [src]="this.imgUrl+this.actor.profile_path" [alt]="this.actor.name">
+      </div>
+    </div>
+    <div class="col">
+        <div>
+            <h3 style="color:white"><b>{{this.actor.name}}</b></h3>
+            <br>
+            <p style="color:white"><span *ngIf="this.actor.birthday">{{this.actor.birthday}}</span><span *ngIf="this.actor.deathday">  -  {{this.actor.deathday}}</span></p>
+            <p><b>Biography:</b></p>
+            <p>{{this.actor.biography}}</p>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!-- Movies from Actor -->
+<div class="outer padbot-8" *ngIf="this.movies">
+  <h3 style="color:white"><b>Movies from this Actor:</b></h3>
+  <div class="inner">
+    <div class="poster animated"*ngFor='let movie of this.movies | slice:0:5; let i = index;'>
+        <a [routerLink]="['../movie']" (click)="setSelectedMovieId(movie.id)">
+          <img [src]="this.imgUrl+movie.poster_path" [alt]="movie.imgName">
+          <div class="text-block-top">
+              <h2>{{movie.vote_average}}</h2>
+          </div>
+          <div class="text-block-bot">
+            <p>{{movie.original_title}}</p>
+          </div>
+        </a>
+    </div>
+  </div>
+</div>
+
+<app-loading *ngIf="!(this.actor || this.movies)"></app-loading>
