@@ -16,6 +16,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { TutorialComponent } from './components/tutorial/tutorial.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     AboutComponent,
     ContactComponent,
     WelcomeComponent,
-    LoadingComponent
+    LoadingComponent,
+    TutorialComponent
   ],
   imports: [
     BrowserModule,

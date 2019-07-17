@@ -10,6 +10,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { TutorialComponent } from './components/tutorial/tutorial.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'actor', component: ActorPageComponent},
   { path: 'about', component: AboutComponent},
   { path: 'contact', component: ContactComponent},
+  { path: 'tutorial', component: TutorialComponent},
   { path: '**', component: NotFoundComponent}
 ];
 
