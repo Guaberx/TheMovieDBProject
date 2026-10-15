@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top px-3">
+  <a class="navbar-brand" routerLink="/">MoviesApp</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    aria-controls="navbarContent"
+    [attr.aria-expanded]="menuOpen()"
+    aria-label="Toggle navigation"
+    (click)="menuOpen.set(!menuOpen())"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarContent" [class.show]="menuOpen()">
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/movies"
+          routerLinkActive="active"
+          (click)="menuOpen.set(false)"
+          >Movies</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/actors"
+          routerLinkActive="active"
+          (click)="menuOpen.set(false)"
+          >Actors</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/contact"
+          routerLinkActive="active"
+          (click)="menuOpen.set(false)"
+          >Contact</a
+        >
+      </li>
+    </ul>
+    <form
+      class="d-flex gap-3"
+      role="search"
+      (submit)="$event.preventDefault(); search(searchInput.value)"
+    >
+      <input
+        #searchInput
+        class="form-control"
+        type="search"
+        placeholder="Search"
+        aria-label="Search movies"
+      />
+      <button class="searchButton px-3" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

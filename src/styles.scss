@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 
 //El color de fondo de todo el sitio
 section,html,body{
@@ -19,6 +18,7 @@ section,html,body{
 }
 
 .startbtn{
+    display: block;
     position: relative;
     bottom: 1em;
     left: 1em;
@@ -36,6 +36,9 @@ section,html,body{
 
 .searchButton{
     @extend .rounding;
+    border: none;
+    color: white;
+    white-space: nowrap;
     cursor: pointer;
     background-color: rgba(255,0,0,0.7);
     height: 5vh;
@@ -45,6 +48,7 @@ section,html,body{
     text-align: center;
     font-family: Helvetica;
     font-size: 3vh;
+    line-height: 5vh;
 }
 
 .rounding{
@@ -64,6 +68,9 @@ p{
 }
 footer{
     background-color: #000;
+    a{
+        text-decoration: none;
+    }
     bottom: 0;
     width: 100%;
     position: absolute;
@@ -81,13 +88,6 @@ footer{
     padding-bottom: 8em;
 }
 
-.footer {
-    padding: 10px 15px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-}
 
 //Este contiene todos los posters de las peliculas dando los margenes de forma responsive
 div.outer{
@@ -106,7 +106,7 @@ div.inner{
 }
 
 //Todas las propiedades de cada poster o foto de persona en el sitio
-div.poster{
+.poster{
     vertical-align: top;
     display: inline-table;
     padding-top: 1em;
@@ -127,9 +127,41 @@ div.poster{
         // float: left;
         
     }
+    a{
+        text-decoration: none;
+    }
     p{
         position: absolute;
     }
+}
+
+//TMDB posters and profile photos are 2:3; reserving the space keeps the grid from jumping while they load
+app-poster-card img{
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+//Placeholder card for movies or people without an image
+.poster-placeholder{
+    aspect-ratio: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    border-radius: 15px;
+    border: 2px solid rgba(53, 59, 43, 0.384);
+    background: linear-gradient(160deg, rgb(52, 58, 64), rgb(20, 22, 24));
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    font-weight: bold;
+}
+
+//Loading spinner in the site's accent red
+.loading-spinner{
+    width: 4rem;
+    height: 4rem;
+    color: rgba(255, 0, 0, 0.7);
 }
 
 //El texto con la puntuacion de la pelicula cuando estan todas las miniaturas
@@ -168,14 +200,15 @@ div.poster{
   }
 
 //Animaciones
-div.poster.animated:hover{
+app-poster-card.animated:hover{
     animation-name:bigger;
     animation-duration:1s;
     animation-timing-function: ease;
     animation-fill-mode:forwards;
 }
 
-div.poster.big{
+// Detail-page poster
+.poster.big{
     width: 20em;    
 }
 

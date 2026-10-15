@@ -1,27 +1,36 @@
-# MoviesAPP
+# MoviesApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
+Browse popular movies and actors from [The Movie Database (TMDB)](https://www.themoviedb.org/), search for movies, and open detail pages with cast, filmography and similar titles.
 
-## Development server
+Built with Angular 22 (standalone components, signals, `rxResource`) and Bootstrap 5.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Requirements
 
-## Code scaffolding
+Node.js `^22.22.3`, `^24.15.0` or `>=26`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Getting started
 
-## Build
+```bash
+npm install
+npm start          # dev server at http://localhost:4200
+npm run build      # production build in dist/movies-app
+npm test           # unit tests (Vitest)
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Routes
 
-## Running unit tests
+| URL                                       | Page                 |
+| ----------------------------------------- | -------------------- |
+| `/`                                       | Welcome              |
+| `/movies`                                 | Popular movies       |
+| `/movies?q=batman`                        | Movie search results |
+| `/movies/429617-spider-man-far-from-home` | Movie details        |
+| `/actors`                                 | Popular actors       |
+| `/actors/1136406-tom-holland`             | Actor details        |
+| `/contact`, `/tutorial`                   | Static pages         |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Detail URLs use an `id-slug` segment. Only the numeric id is used for lookups; a missing or outdated slug is replaced with the canonical one.
 
-## Running end-to-end tests
+## Configuration
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+The TMDB API key lives in `src/environments/environment.ts`. TMDB keys are free and intended for client-side use, so it is committed on purpose.

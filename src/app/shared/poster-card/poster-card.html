@@ -1,0 +1,25 @@
+@if (link(); as link) {
+  <a [routerLink]="link">
+    <ng-container [ngTemplateOutlet]="image" />
+    @if (rating() !== undefined) {
+      <div class="text-block-top">
+        <h2>{{ rating() | number: '1.1-1' }}</h2>
+      </div>
+    }
+    <div class="text-block-bot">
+      <p>{{ title() }}</p>
+    </div>
+  </a>
+} @else {
+  <ng-container [ngTemplateOutlet]="image" />
+}
+
+<ng-template #image>
+  @if (imagePath()) {
+    <img [src]="imageBaseUrl + imagePath()" [alt]="title()" loading="lazy" />
+  } @else {
+    <div class="poster-placeholder" role="img" [attr.aria-label]="title()">
+      <span>{{ title() }}</span>
+    </div>
+  }
+</ng-template>

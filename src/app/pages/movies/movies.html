@@ -1,0 +1,23 @@
+@if (movies.hasValue()) {
+  <div class="outer padtop-5 padbot-8">
+    @if (query()) {
+      <h3 class="text-white pt-3">Results for “{{ query() }}”</h3>
+    }
+    <div class="inner">
+      @for (movie of movies.value().results; track movie.id) {
+        <app-poster-card
+          [imagePath]="movie.poster_path"
+          [title]="movie.original_title"
+          [rating]="movie.vote_average"
+          [link]="movieLink(movie)"
+        />
+      } @empty {
+        <p>No movies found.</p>
+      }
+    </div>
+  </div>
+} @else if (movies.error()) {
+  <app-not-found />
+} @else {
+  <app-loading />
+}

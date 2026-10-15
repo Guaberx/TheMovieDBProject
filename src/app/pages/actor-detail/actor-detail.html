@@ -1,0 +1,46 @@
+@if (actor.hasValue()) {
+  @let a = actor.value();
+  <div class="container padtop-6">
+    <div class="row">
+      <div class="col-md-auto">
+        <app-poster-card [imagePath]="a.profile_path" [title]="a.name" [big]="true" />
+      </div>
+      <div class="col">
+        <h3 class="text-white">
+          <b>{{ a.name }}</b>
+        </h3>
+        <br />
+        @if (a.birthday) {
+          <p>
+            {{ a.birthday }}
+            @if (a.deathday) {
+              &nbsp;-&nbsp; {{ a.deathday }}
+            }
+          </p>
+        }
+        <p><b>Biography:</b></p>
+        <p>{{ a.biography }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="outer padbot-8">
+    @if (movies().length) {
+      <h3 class="text-white"><b>Movies from this Actor:</b></h3>
+      <div class="inner">
+        @for (movie of movies(); track movie.id) {
+          <app-poster-card
+            [imagePath]="movie.poster_path"
+            [title]="movie.original_title"
+            [rating]="movie.vote_average"
+            [link]="movieLink(movie)"
+          />
+        }
+      </div>
+    }
+  </div>
+} @else if (actor.error() || actorId() === undefined) {
+  <app-not-found />
+} @else {
+  <app-loading />
+}
