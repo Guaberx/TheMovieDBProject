@@ -31,6 +31,10 @@ npm test           # unit tests (Vitest)
 
 Detail URLs use an `id-slug` segment. Only the numeric id is used for lookups; a missing or outdated slug is replaced with the canonical one.
 
+## Deployment
+
+Hosted on Firebase at https://themoviedbproject.web.app. See [DEPLOYMENT.md](DEPLOYMENT.md) for how to deploy, and for a note on why the site sits in the wrong Firebase project.
+
 ## Configuration
 
 The TMDB API key lives in `src/environments/environment.ts`. TMDB keys are free and intended for client-side use, so it is committed on purpose.
