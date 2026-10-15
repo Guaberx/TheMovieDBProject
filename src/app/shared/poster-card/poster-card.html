@@ -16,7 +16,13 @@
 
 <ng-template #image>
   @if (imagePath()) {
-    <img [src]="imageBaseUrl + imagePath()" [alt]="title()" loading="lazy" />
+    <!-- Linked cards repeat the title in their caption, so their image alt stays empty.
+         The big detail-page poster is the page's main content, so it gets fetched first. -->
+    <img
+      [src]="imageBaseUrl + imagePath()"
+      [alt]="link() ? '' : title()"
+      [attr.fetchpriority]="big() ? 'high' : null"
+    />
   } @else {
     <div class="poster-placeholder" role="img" [attr.aria-label]="title()">
       <span>{{ title() }}</span>

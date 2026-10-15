@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "monedarapida"
+  },
+  "targets": {
+    "monedarapida": {
+      "hosting": {
+        "app": ["themoviedbproject"]
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-contact',
   template: `
-    <div class="container padtop-6 padbot-8">
+    <div class="container padtop-6 pb-5">
       <div class="row">
         <div class="col-md-auto">
           <div class="poster big">

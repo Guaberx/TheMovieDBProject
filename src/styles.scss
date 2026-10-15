@@ -8,6 +8,15 @@ section,html,body{
     position: relative;
 }
 
+//The page is a column: the main content grows to fill the screen and the footer follows it
+app-root > section{
+    display: flex;
+    flex-direction: column;
+    main{
+        flex: 1;
+    }
+}
+
 .startbtn{
     animation-name:appear;
     animation-duration:1s;
@@ -68,12 +77,11 @@ p{
 }
 footer{
     background-color: #000;
+    //Positioned so it paints over the welcome page's red bar
+    position: relative;
     a{
         text-decoration: none;
     }
-    bottom: 0;
-    width: 100%;
-    position: absolute;
 }
 
 .padtop-6{
@@ -82,10 +90,6 @@ footer{
 
 .padtop-5{
     padding-top: 5em;
-}
-
-.padbot-8{
-    padding-bottom: 8em;
 }
 
 

@@ -11,7 +11,7 @@ import { NotFound } from '../not-found/not-found';
   imports: [PosterCard, Loading, NotFound],
   template: `
     @if (actors.hasValue()) {
-      <div class="outer padtop-5 padbot-8">
+      <div class="outer padtop-5 pb-5">
         <div class="inner">
           @for (actor of actors.value().results; track actor.id) {
             <app-poster-card
