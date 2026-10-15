@@ -1,5 +1,5 @@
 import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
@@ -21,5 +21,16 @@ export class PosterCard {
   readonly link = input<unknown[]>();
   readonly big = input(false);
 
-  protected readonly imageBaseUrl = environment.tmdb.imageBaseUrl;
+  // Cards render about 160px wide, so the browser picks 185px or 342px (high-DPI) images.
+  // The big detail-page poster always uses the 500px version.
+  protected readonly src = computed(() => this.imageUrl('w500'));
+  protected readonly srcset = computed(() =>
+    this.big()
+      ? null
+      : ['w185', 'w342', 'w500'].map((w) => `${this.imageUrl(w)} ${w.slice(1)}w`).join(', '),
+  );
+
+  private imageUrl(size: string) {
+    return `${environment.tmdb.imageBaseUrl}/${size}${this.imagePath()}`;
+  }
 }

@@ -19,7 +19,9 @@
     <!-- Linked cards repeat the title in their caption, so their image alt stays empty.
          The big detail-page poster is the page's main content, so it gets fetched first. -->
     <img
-      [src]="imageBaseUrl + imagePath()"
+      [src]="src()"
+      [attr.srcset]="srcset()"
+      [attr.sizes]="big() ? null : '160px'"
       [alt]="link() ? '' : title()"
       [attr.fetchpriority]="big() ? 'high' : null"
     />
