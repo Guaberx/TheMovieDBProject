@@ -7,7 +7,7 @@
       @for (movie of movies.value().results; track movie.id) {
         <app-poster-card
           [imagePath]="movie.poster_path"
-          [title]="movie.original_title"
+          [title]="movie.title"
           [rating]="movie.vote_average"
           [link]="movieLink(movie)"
         />

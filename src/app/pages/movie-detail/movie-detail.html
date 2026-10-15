@@ -3,12 +3,15 @@
   <div class="container padtop-6">
     <div class="row">
       <div class="col-md-auto">
-        <app-poster-card [imagePath]="m.poster_path" [title]="m.original_title" [big]="true" />
+        <app-poster-card [imagePath]="m.poster_path" [title]="m.title" [big]="true" />
       </div>
       <div class="col">
         <h3 class="text-white">
-          <b>{{ m.original_title }}</b>
+          <b>{{ m.title }}</b>
         </h3>
+        @if (m.original_title !== m.title) {
+          <p class="text-white-50 mb-0">{{ m.original_title }}</p>
+        }
         <br />
         <h3 class="text-white">
           <span class="goldcolor">{{ m.vote_average.toFixed(1) }}</span> out of 10
@@ -47,7 +50,7 @@
         @for (s of similarMovies(); track s.id) {
           <app-poster-card
             [imagePath]="s.poster_path"
-            [title]="s.original_title"
+            [title]="s.title"
             [rating]="s.vote_average"
             [link]="movieLink(s)"
           />
