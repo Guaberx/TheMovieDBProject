@@ -1,9 +1,15 @@
 @if (link(); as link) {
-  <a [routerLink]="link">
+  <a
+    [routerLink]="link"
+    (pointerenter)="hoverStart()"
+    (pointerleave)="hoverEnd()"
+    (pointerdown)="prefetchNow()"
+    (focus)="prefetchNow()"
+  >
     <ng-container [ngTemplateOutlet]="image" />
     @if (rating() !== undefined) {
       <div class="text-block-top">
-        <h2>{{ rating() | number: '1.1-1' }}</h2>
+        <div class="h2">{{ rating() | number: '1.1-1' }}</div>
       </div>
     }
     <div class="text-block-bot">

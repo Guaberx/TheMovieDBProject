@@ -24,4 +24,23 @@ describe('TmdbApi', () => {
     expect(req.request.urlWithParams).toContain('query=fast%20%26%20furious%20%239');
     req.flush({ page: 1, results: [], total_pages: 0, total_results: 0 });
   });
+
+  it('reuses one request for the same data', () => {
+    const results: unknown[] = [];
+    api.movie(1).subscribe((m) => results.push(m));
+    api.movie(1).subscribe((m) => results.push(m));
+    http.expectOne((r) => r.url.endsWith('/movie/1')).flush({ id: 1 });
+    api.movie(1).subscribe((m) => results.push(m));
+    http.expectNone((r) => r.url.endsWith('/movie/1'));
+    expect(results).toEqual([{ id: 1 }, { id: 1 }, { id: 1 }]);
+  });
+
+  it('goes back to the network after a failed request', () => {
+    api.movie(2).subscribe({ error: () => {} });
+    http
+      .expectOne((r) => r.url.endsWith('/movie/2'))
+      .flush(null, { status: 500, statusText: 'Error' });
+    api.movie(2).subscribe();
+    http.expectOne((r) => r.url.endsWith('/movie/2')).flush({ id: 2 });
+  });
 });

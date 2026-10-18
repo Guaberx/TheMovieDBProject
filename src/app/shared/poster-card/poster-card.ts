@@ -1,7 +1,8 @@
 import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { Prefetch } from '../../core/prefetch';
 
 /** A poster or profile photo. Linked cards show the overlays and hover effect; unlinked ones are the big detail-page image. */
 @Component({
@@ -15,6 +16,9 @@ import { environment } from '../../../environments/environment';
   },
 })
 export class PosterCard {
+  private readonly prefetch = inject(Prefetch);
+  private hoverTimer?: ReturnType<typeof setTimeout>;
+
   readonly imagePath = input<string | null>();
   readonly title = input.required<string>();
   readonly rating = input<number>();
@@ -29,6 +33,22 @@ export class PosterCard {
       ? null
       : ['w185', 'w342', 'w500'].map((w) => `${this.imageUrl(w)} ${w.slice(1)}w`).join(', '),
   );
+
+  // A short hover delay skips cards the pointer only passes over; focus and press prefetch right away.
+  protected hoverStart() {
+    this.hoverTimer ??= setTimeout(() => this.prefetchNow(), 100);
+  }
+
+  protected hoverEnd() {
+    clearTimeout(this.hoverTimer);
+    this.hoverTimer = undefined;
+  }
+
+  protected prefetchNow() {
+    this.hoverEnd();
+    const link = this.link();
+    if (link) this.prefetch.link(link, this.imagePath());
+  }
 
   private imageUrl(size: string) {
     return `${environment.tmdb.imageBaseUrl}/${size}${this.imagePath()}`;
