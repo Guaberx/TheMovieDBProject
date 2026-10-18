@@ -27,7 +27,19 @@ Checked on 2026-10-15 with `firebase hosting:sites:list`:
 - **`firebase.json`**:
   - Serves `dist/movies-app/browser`, which is the output of `npm run build`.
   - Rewrites every path to `/index.html`. Without this, opening any URL other than `/` (for example `/movies`) returns a 404, because those pages only exist inside the Angular router. That was the bug in the 2019 deploy.
-  - Caches JS/CSS for a year. Their filenames change on every build, so that's safe. `index.html` is never cached, so new deploys show up right away.
+  - Caches JS/CSS for a year. Their filenames change on every build, so that's safe. Everything else (including `/` and deep links like `/movies/123`, which are served `index.html`) is `no-cache`, so new deploys show up right away.
+  - Sends security headers on every response: `Content-Security-Policy`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and `Permissions-Policy`.
+
+### If the CSP breaks the page
+
+The CSP only allows scripts from the site itself plus one inline script, identified by its hash. The Angular build adds that script to load the CSS without blocking the first paint. If a future Angular version changes it, the page stays unstyled and the console shows a CSP error naming the expected hash. To get the new hash, run:
+
+```bash
+npm run build
+node -e "const h=require('fs').readFileSync('dist/movies-app/browser/index.html','utf8');for(const m of h.matchAll(/<script>([\s\S]*?)<\/script>/g))console.log('sha256-'+require('crypto').createHash('sha256').update(m[1]).digest('base64'))"
+```
+
+Put it in `script-src` in `firebase.json`. The TMDB hosts are allowed in `img-src` (images) and `connect-src` (API); a new external service needs to be added there too. The local hosting emulator ignores `headers`, so check CSP changes on a preview channel.
 
 ## Try it on a temporary URL first
 
