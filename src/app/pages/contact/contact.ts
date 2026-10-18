@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
           </div>
         </div>
         <div class="col">
-          <h3 class="text-white"><b>MovieApp</b></h3>
+          <h1 class="h3 text-white"><b>MovieApp</b></h1>
           <br />
           <p>
             Developed by: <b>Juan Fernando Otoya</b><br />Using Angular.<br /><br />Description:

@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-not-found',
   template: `
-    <svg height="100vh" width="100%" role="img" aria-label="Error 404: page not found">
+    <h1 class="visually-hidden">Error 404: page not found</h1>
+    <svg height="100vh" width="100%" aria-hidden="true">
       <text
         x="50%"
         y="30vh"

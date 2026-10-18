@@ -11,12 +11,13 @@ import { Welcome } from './pages/welcome/welcome';
 
 // Detail routes take an "id-slug" segment (e.g. /movies/429617-spider-man-far-from-home).
 // Only the id is used for lookups; search lives in a query param (/movies?q=batman).
+// Pages without a title here set it themselves from the data they load.
 export const routes: Routes = [
   { path: '', component: Welcome, title: 'MoviesApp' },
-  { path: 'movies', component: Movies, title: 'Movies · MoviesApp' },
-  { path: 'movies/:id', component: MovieDetail, title: 'Movie · MoviesApp' },
+  { path: 'movies', component: Movies },
+  { path: 'movies/:id', component: MovieDetail },
   { path: 'actors', component: Actors, title: 'Actors · MoviesApp' },
-  { path: 'actors/:id', component: ActorDetail, title: 'Actor · MoviesApp' },
+  { path: 'actors/:id', component: ActorDetail },
   { path: 'about', component: About, title: 'About · MoviesApp' },
   { path: 'contact', component: Contact, title: 'Contact · MoviesApp' },
   { path: 'tutorial', component: Tutorial, title: 'Tutorial · MoviesApp' },

@@ -1,7 +1,9 @@
 @if (movies.hasValue()) {
   <div class="outer padtop-5 pb-5">
     @if (query()) {
-      <h3 class="text-white pt-3">Results for “{{ query() }}”</h3>
+      <h1 class="h3 text-white pt-3">Results for “{{ query() }}”</h1>
+    } @else {
+      <h1 class="visually-hidden">Popular movies</h1>
     }
     <div class="inner">
       @for (movie of movies.value().results; track movie.id) {
@@ -17,7 +19,7 @@
     </div>
   </div>
 } @else if (movies.error()) {
-  <app-not-found />
+  <app-load-error (retry)="movies.reload()" />
 } @else {
   <app-loading />
 }

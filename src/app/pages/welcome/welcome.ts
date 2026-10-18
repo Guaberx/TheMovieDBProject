@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-welcome',
   imports: [RouterLink],
   template: `
+    <h1 class="visually-hidden">MoviesApp</h1>
     <a routerLink="/movies" class="startbtn" aria-label="MoviesApp Watch">
       <svg height="100vh" width="90vw">
         <text

@@ -6,16 +6,16 @@
         <app-poster-card [imagePath]="m.poster_path" [title]="m.title" [big]="true" />
       </div>
       <div class="col">
-        <h3 class="text-white">
+        <h1 class="h3 text-white">
           <b>{{ m.title }}</b>
-        </h3>
+        </h1>
         @if (m.original_title !== m.title) {
           <p class="text-white-50 mb-0">{{ m.original_title }}</p>
         }
         <br />
-        <h3 class="text-white">
+        <p class="h3 text-white">
           <span class="goldcolor">{{ m.vote_average.toFixed(1) }}</span> out of 10
-        </h3>
+        </p>
         <p>
           <b>Languages: </b>
           @for (lang of m.spoken_languages; track lang.name) {
@@ -23,14 +23,18 @@
           }
         </p>
         <p><b>Overview:</b></p>
-        <p>{{ m.overview }}</p>
+        @if (m.overview) {
+          <p>{{ m.overview }}</p>
+        } @else {
+          <p class="text-white-50">No overview available.</p>
+        }
       </div>
     </div>
   </div>
 
   @if (cast().length) {
     <div class="outer">
-      <h3 class="text-white"><b>Cast:</b></h3>
+      <h2 class="h3 text-white"><b>Cast:</b></h2>
       <div class="inner">
         @for (actor of cast(); track actor.id) {
           <app-poster-card
@@ -45,7 +49,7 @@
 
   <div class="outer pb-5">
     @if (similarMovies().length) {
-      <h3 class="text-white"><b>You may also like:</b></h3>
+      <h2 class="h3 text-white"><b>You may also like:</b></h2>
       <div class="inner">
         @for (s of similarMovies(); track s.id) {
           <app-poster-card
@@ -58,8 +62,10 @@
       </div>
     }
   </div>
-} @else if (movie.error() || movieId() === undefined) {
+} @else if (notFound()) {
   <app-not-found />
+} @else if (movie.error()) {
+  <app-load-error (retry)="retry()" />
 } @else {
   <app-loading />
 }

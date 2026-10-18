@@ -6,9 +6,9 @@
         <app-poster-card [imagePath]="a.profile_path" [title]="a.name" [big]="true" />
       </div>
       <div class="col">
-        <h3 class="text-white">
+        <h1 class="h3 text-white">
           <b>{{ a.name }}</b>
-        </h3>
+        </h1>
         <br />
         @if (a.birthday) {
           <p>
@@ -19,14 +19,18 @@
           </p>
         }
         <p><b>Biography:</b></p>
-        <p>{{ a.biography }}</p>
+        @if (a.biography) {
+          <p>{{ a.biography }}</p>
+        } @else {
+          <p class="text-white-50">No biography available.</p>
+        }
       </div>
     </div>
   </div>
 
   <div class="outer pb-5">
     @if (movies().length) {
-      <h3 class="text-white"><b>Movies from this Actor:</b></h3>
+      <h2 class="h3 text-white"><b>Movies from this Actor:</b></h2>
       <div class="inner">
         @for (movie of movies(); track movie.id) {
           <app-poster-card
@@ -39,8 +43,10 @@
       </div>
     }
   </div>
-} @else if (actor.error() || actorId() === undefined) {
+} @else if (notFound()) {
   <app-not-found />
+} @else if (actor.error()) {
+  <app-load-error (retry)="retry()" />
 } @else {
   <app-loading />
 }
