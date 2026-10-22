@@ -9,13 +9,14 @@ import { RouterLink } from '@angular/router';
       <h1 class="h3 text-white mb-4"><b>About MoviesApp</b></h1>
       <p>
         MoviesApp lets you browse what's popular in movies, look up actors, and search for any
-        title. Each movie shows its rating, overview, cast and similar films; each actor shows a
+        title. Each movie shows its rating, overview, trailer, cast and similar films; each actor shows a
         short biography and the movies they're known for.
       </p>
       <ul class="feature-list">
         <li><a routerLink="/movies">Popular movies</a>, updated daily by TMDB</li>
         <li><a routerLink="/actors">Popular actors</a> and their filmographies</li>
         <li>Search by title from the bar at the top</li>
+        <li>Trailers right on the movie page</li>
       </ul>
       <p>
         Built with Angular and Bootstrap.

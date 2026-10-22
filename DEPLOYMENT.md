@@ -39,7 +39,7 @@ npm run build
 node -e "const h=require('fs').readFileSync('dist/movies-app/browser/index.html','utf8');for(const m of h.matchAll(/<script>([\s\S]*?)<\/script>/g))console.log('sha256-'+require('crypto').createHash('sha256').update(m[1]).digest('base64'))"
 ```
 
-Put it in `script-src` in `firebase.json`. The TMDB hosts are allowed in `img-src` (images) and `connect-src` (API); a new external service needs to be added there too. The local hosting emulator ignores `headers`, so check CSP changes on a preview channel.
+Put it in `script-src` in `firebase.json`. The TMDB hosts are allowed in `img-src` (images) and `connect-src` (API), and YouTube's privacy-enhanced player in `frame-src` (trailers); a new external service needs to be added there too. The local hosting emulator ignores `headers`, so check CSP changes on a preview channel.
 
 ## Try it on a temporary URL first
 

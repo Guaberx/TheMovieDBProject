@@ -31,6 +31,9 @@
             }
           </ul>
         }
+        @if (trailer(); as t) {
+          <app-trailer [videoKey]="t.key" [title]="m.title + ' trailer'" />
+        }
         @if (m.tagline) {
           <p class="detail-tagline">{{ m.tagline }}</p>
         }

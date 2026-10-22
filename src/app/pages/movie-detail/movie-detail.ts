@@ -11,11 +11,12 @@ import { actorLink, idSlug, movieLink, parseIdSlug } from '../../core/slug';
 import { LoadError } from '../../shared/load-error/load-error';
 import { Loading } from '../../shared/loading/loading';
 import { PosterCard } from '../../shared/poster-card/poster-card';
+import { Trailer } from '../../shared/trailer/trailer';
 import { NotFound } from '../not-found/not-found';
 
 @Component({
   selector: 'app-movie-detail',
-  imports: [PosterCard, Loading, LoadError, NotFound, DecimalPipe],
+  imports: [PosterCard, Loading, LoadError, NotFound, Trailer, DecimalPipe],
   templateUrl: './movie-detail.html',
 })
 export class MovieDetail {
@@ -38,6 +39,21 @@ export class MovieDetail {
   protected readonly similar = rxResource({
     params: () => this.movieId(),
     stream: ({ params }) => this.api.similarMovies(params),
+  });
+
+  protected readonly videos = rxResource({
+    params: () => this.movieId(),
+    stream: ({ params }) => this.api.movieVideos(params),
+  });
+
+  /** The best YouTube trailer: official ones first, then teasers if there's no trailer. */
+  protected readonly trailer = computed(() => {
+    const youtube = (valueOrUndefined(this.videos)?.results ?? []).filter(
+      (v) => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser'),
+    );
+    const rank = (v: (typeof youtube)[number]) =>
+      (v.type === 'Trailer' ? 0 : 2) + (v.official ? 0 : 1);
+    return youtube.sort((a, b) => rank(a) - rank(b))[0];
   });
 
   protected readonly cast = computed(() => valueOrUndefined(this.credits)?.cast.slice(0, 6) ?? []);

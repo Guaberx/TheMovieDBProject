@@ -1,13 +1,14 @@
-@if (movies.hasValue()) {
+@let list = movies.first;
+@if (list.hasValue()) {
   <div class="container padtop-5 pb-5">
     @if (query()) {
       <h1 class="page-title">Results for “{{ query() }}”</h1>
     } @else {
       <h1 class="page-title">Popular movies</h1>
     }
-    @if (movies.value().results.length) {
+    @if (movies.items().length) {
       <div class="card-grid">
-        @for (movie of movies.value().results; track movie.id) {
+        @for (movie of movies.items(); track movie.id) {
           <app-poster-card
             [imagePath]="movie.poster_path"
             [title]="movie.title"
@@ -17,14 +18,21 @@
           />
         }
       </div>
+      @if (movies.hasMore()) {
+        <app-load-more
+          [loading]="movies.loadingMore()"
+          [failed]="movies.loadMoreFailed()"
+          (load)="movies.loadMore()"
+        />
+      }
     } @else {
       <div class="empty-state empty-state-inline">
         <p>No movies match your search. Try a different title.</p>
       </div>
     }
   </div>
-} @else if (movies.error()) {
-  <app-load-error (retry)="movies.reload()" />
+} @else if (list.error()) {
+  <app-load-error (retry)="list.reload()" />
 } @else {
   <app-loading />
 }

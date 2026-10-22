@@ -10,6 +10,7 @@ import {
   PersonDetails,
   PersonMovieCredits,
   PersonSummary,
+  Video,
 } from './tmdb.models';
 
 const { baseUrl, apiKey, language } = environment.tmdb;
@@ -17,6 +18,9 @@ const { baseUrl, apiKey, language } = environment.tmdb;
 /** How long a response is reused before it's fetched again. */
 const CACHE_TTL_MS = 10 * 60 * 1000;
 const CACHE_MAX_ENTRIES = 100;
+
+// Page 1 is requested without the param, so it shares its cache entry with older callers.
+const pageParam = (page: number): Record<string, number> => (page > 1 ? { page } : {});
 
 @Injectable({ providedIn: 'root' })
 export class TmdbApi {
@@ -26,12 +30,12 @@ export class TmdbApi {
   private readonly cache = new Map<string, { response: Observable<unknown>; time: number }>();
 
   // Movies
-  popularMovies(): Observable<Paged<MovieSummary>> {
-    return this.get('movie/popular');
+  popularMovies(page = 1): Observable<Paged<MovieSummary>> {
+    return this.get('movie/popular', pageParam(page));
   }
 
-  searchMovies(query: string): Observable<Paged<MovieSummary>> {
-    return this.get('search/movie', { query, include_adult: false });
+  searchMovies(query: string, page = 1): Observable<Paged<MovieSummary>> {
+    return this.get('search/movie', { query, include_adult: false, ...pageParam(page) });
   }
 
   movie(id: number): Observable<MovieDetails> {
@@ -46,9 +50,13 @@ export class TmdbApi {
     return this.get(`movie/${id}/similar`);
   }
 
+  movieVideos(id: number): Observable<{ results: Video[] }> {
+    return this.get(`movie/${id}/videos`);
+  }
+
   // People
-  popularPeople(): Observable<Paged<PersonSummary>> {
-    return this.get('person/popular');
+  popularPeople(page = 1): Observable<Paged<PersonSummary>> {
+    return this.get('person/popular', pageParam(page));
   }
 
   person(id: number): Observable<PersonDetails> {

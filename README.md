@@ -1,6 +1,6 @@
 # MoviesApp
 
-Browse popular movies and actors from [The Movie Database (TMDB)](https://www.themoviedb.org/), search for movies, and open detail pages with cast, filmography and similar titles.
+Browse popular movies and actors from [The Movie Database (TMDB)](https://www.themoviedb.org/), search for movies, and open detail pages with trailers, cast, filmography and similar titles.
 
 Built with Angular 22 (standalone components, signals, `rxResource`) and Bootstrap 5.
 

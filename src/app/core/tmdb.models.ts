@@ -44,3 +44,13 @@ export interface MovieCredits {
 export interface PersonMovieCredits {
   cast: MovieSummary[];
 }
+
+export interface Video {
+  key: string;
+  name: string;
+  /** "YouTube", "Vimeo", ... */
+  site: string;
+  /** "Trailer", "Teaser", "Clip", ... */
+  type: string;
+  official: boolean;
+}

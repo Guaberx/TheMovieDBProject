@@ -1,17 +1,18 @@
 import { Component, computed, effect, inject, input } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { TmdbApi } from '../../core/tmdb-api';
 import { year } from '../../core/format';
+import { pagedResource } from '../../core/paged';
 import { movieLink } from '../../core/slug';
 import { LoadError } from '../../shared/load-error/load-error';
+import { LoadMore } from '../../shared/load-more/load-more';
 import { Loading } from '../../shared/loading/loading';
 import { PosterCard } from '../../shared/poster-card/poster-card';
 
 /** Popular movies, or search results when there's a ?q= query param. */
 @Component({
   selector: 'app-movies',
-  imports: [PosterCard, Loading, LoadError],
+  imports: [PosterCard, Loading, LoadError, LoadMore],
   templateUrl: './movies.html',
 })
 export class Movies {
@@ -20,10 +21,10 @@ export class Movies {
   readonly q = input<string>();
   protected readonly query = computed(() => this.q()?.trim() ?? '');
 
-  protected readonly movies = rxResource({
-    params: () => ({ query: this.query() }),
-    stream: ({ params }) =>
-      params.query ? this.api.searchMovies(params.query) : this.api.popularMovies(),
+  protected readonly movies = pagedResource({
+    params: () => this.query(),
+    load: (query, page) =>
+      query ? this.api.searchMovies(query, page) : this.api.popularMovies(page),
   });
 
   protected readonly movieLink = movieLink;

@@ -453,6 +453,66 @@ footer{
     }
 }
 
+// ---------------------------------------------------------------- Trailer
+
+.trailer-button{
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1.25rem;
+    padding: .5rem 1.25rem;
+}
+.trailer-dialog{
+    width: min(960px, 92vw);
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    overflow: visible;
+    background: black;
+    box-shadow: var(--shadow-hover);
+    &::backdrop{
+        background: rgba(0, 0, 0, .8);
+    }
+}
+.trailer-frame{
+    aspect-ratio: 16 / 9;
+    iframe{
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        border-radius: 12px;
+    }
+}
+.trailer-close{
+    position: absolute;
+    top: -2.75rem;
+    right: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .15);
+    color: white;
+    &:hover, &:focus-visible{
+        background: var(--accent);
+    }
+}
+
+// ---------------------------------------------------------------- Lists
+
+.load-more{
+    margin-top: 2.5rem;
+    text-align: center;
+    p{
+        color: var(--text-muted);
+    }
+    button:disabled{
+        opacity: .7;
+        cursor: progress;
+    }
+}
+
 // ---------------------------------------------------------------- States
 
 .loading-spinner{
