@@ -25,6 +25,7 @@ export class Movies {
     params: () => this.query(),
     load: (query, page) =>
       query ? this.api.searchMovies(query, page) : this.api.popularMovies(page),
+    imagePath: (movie) => movie.poster_path,
   });
 
   protected readonly movieLink = movieLink;

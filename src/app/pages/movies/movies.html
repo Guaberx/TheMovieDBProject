@@ -22,6 +22,7 @@
         <app-load-more
           [loading]="movies.loadingMore()"
           [failed]="movies.loadMoreFailed()"
+          [prefetch]="movies.prefetchNext"
           (load)="movies.loadMore()"
         />
       }

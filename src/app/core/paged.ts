@@ -1,6 +1,7 @@
 import { DestroyRef, computed, inject, linkedSignal, untracked } from '@angular/core';
 import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
+import { Prefetch } from './prefetch';
 import { Paged } from './tmdb.models';
 
 /** TMDB refuses pages past 500, whatever total_pages says. */
@@ -14,8 +15,11 @@ const MAX_PAGE = 500;
 export function pagedResource<P, T extends { id: number }>(options: {
   params: () => P;
   load: (params: P, page: number) => Observable<Paged<T>>;
+  /** Poster or profile path, so prefetching the next page can warm its first images too. */
+  imagePath: (item: T) => string | null;
 }) {
   const destroyRef = inject(DestroyRef);
+  const prefetch = inject(Prefetch);
   const first = rxResource({
     params: options.params,
     stream: ({ params }) => options.load(params, 1),
@@ -64,6 +68,13 @@ export function pagedResource<P, T extends { id: number }>(options: {
       });
   }
 
+  /** Loads the next page into the cache, so "Load more" shows it instantly. */
+  function prefetchNext() {
+    const state = untracked(more);
+    if (state.loading || !untracked(hasMore)) return;
+    prefetch.list(options.load(untracked(options.params), state.page + 1), options.imagePath);
+  }
+
   return {
     first,
     items,
@@ -71,5 +82,6 @@ export function pagedResource<P, T extends { id: number }>(options: {
     loadingMore: computed(() => more().loading),
     loadMoreFailed: computed(() => more().failed),
     loadMore,
+    prefetchNext,
   };
 }

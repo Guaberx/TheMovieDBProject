@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ApplicationRef, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
@@ -25,6 +26,7 @@ describe('pagedResource', () => {
   };
 
   beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [provideHttpClient()] });
     requests = [];
     query = signal('a');
     list = TestBed.runInInjectionContext(() =>
@@ -35,6 +37,7 @@ describe('pagedResource', () => {
           requests.push({ query: q, page: p, response });
           return response;
         },
+        imagePath: () => null,
       }),
     );
     TestBed.tick();

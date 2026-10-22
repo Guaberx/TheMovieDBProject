@@ -27,6 +27,7 @@ import { PosterCard } from '../../shared/poster-card/poster-card';
           <app-load-more
             [loading]="actors.loadingMore()"
             [failed]="actors.loadMoreFailed()"
+            [prefetch]="actors.prefetchNext"
             (load)="actors.loadMore()"
           />
         }
@@ -44,6 +45,7 @@ export class Actors {
   protected readonly actors = pagedResource({
     params: () => null,
     load: (_, page) => this.api.popularPeople(page),
+    imagePath: (actor) => actor.profile_path,
   });
   protected readonly actorLink = actorLink;
 }

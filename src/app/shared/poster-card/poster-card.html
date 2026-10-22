@@ -1,12 +1,5 @@
 @if (link(); as link) {
-  <a
-    class="poster-link"
-    [routerLink]="link"
-    (pointerenter)="hoverStart()"
-    (pointerleave)="hoverEnd()"
-    (pointerdown)="prefetchNow()"
-    (focus)="prefetchNow()"
-  >
+  <a class="poster-link" [routerLink]="link" [appPrefetch]="prefetchDetail">
     <div class="poster-frame">
       <ng-container [ngTemplateOutlet]="image" />
       @if (rating()) {
@@ -35,7 +28,7 @@
     <img
       [src]="src()"
       [attr.srcset]="srcset()"
-      [attr.sizes]="big() ? null : '180px'"
+      [attr.sizes]="big() ? null : sizes"
       [alt]="link() ? '' : title()"
       [attr.fetchpriority]="big() ? 'high' : null"
     />

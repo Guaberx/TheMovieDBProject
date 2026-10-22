@@ -18,6 +18,7 @@
           class="nav-link"
           routerLink="/movies"
           routerLinkActive="active"
+          [appPrefetch]="prefetchMovies"
           (click)="menuOpen.set(false)"
           >Movies</a
         >
@@ -27,6 +28,7 @@
           class="nav-link"
           routerLink="/actors"
           routerLinkActive="active"
+          [appPrefetch]="prefetchActors"
           (click)="menuOpen.set(false)"
           >Actors</a
         >
