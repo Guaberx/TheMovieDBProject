@@ -4,22 +4,14 @@ import { Component } from '@angular/core';
   selector: 'app-contact',
   template: `
     <div class="container padtop-6 pb-5">
-      <div class="row">
-        <div class="col-md-auto">
-          <div class="poster big">
-            <img src="profile.jfif" alt="Creator's profile picture" />
-          </div>
-        </div>
-        <div class="col">
-          <h1 class="h3 text-white"><b>MovieApp</b></h1>
-          <br />
-          <p>
-            Developed by: <b>Juan Fernando Otoya</b><br />Using Angular.<br /><br />Description:
-          </p>
-          <ul class="text-white">
-            <li>Background: Computer science student</li>
-            <li>University: Pontificia Universidad Javeriana Cali</li>
-            <li>Born in 1997</li>
+      <div class="profile">
+        <img class="profile-photo" src="profile.jfif" alt="Juan Fernando Otoya" />
+        <div>
+          <h1 class="h3 text-white mb-1"><b>Juan Fernando Otoya</b></h1>
+          <p class="profile-role">Developer of MoviesApp</p>
+          <ul class="feature-list">
+            <li>Computer science, Pontificia Universidad Javeriana Cali</li>
+            <li>Built MoviesApp with Angular</li>
           </ul>
         </div>
       </div>

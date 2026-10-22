@@ -4,9 +4,9 @@ import { Component, output } from '@angular/core';
 @Component({
   selector: 'app-load-error',
   template: `
-    <div class="text-center padtop-6 vh-100">
+    <div class="empty-state">
       <h1 class="h3 text-white">Couldn't load this page</h1>
-      <p class="text-center">Check your connection and try again.</p>
+      <p>Check your connection and try again.</p>
       <button class="searchButton px-3" type="button" (click)="retry.emit()">Try again</button>
     </div>
   `,

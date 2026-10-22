@@ -27,7 +27,7 @@ npm test           # unit tests (Vitest)
 | `/movies/429617-spider-man-far-from-home` | Movie details        |
 | `/actors`                                 | Popular actors       |
 | `/actors/1136406-tom-holland`             | Actor details        |
-| `/contact`, `/tutorial`                   | Static pages         |
+| `/about`, `/contact`                      | Static pages         |
 
 Detail URLs use an `id-slug` segment. Only the numeric id is used for lookups; a missing or outdated slug is replaced with the canonical one.
 

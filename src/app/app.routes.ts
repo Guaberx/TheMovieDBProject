@@ -6,7 +6,6 @@ import { Contact } from './pages/contact/contact';
 import { MovieDetail } from './pages/movie-detail/movie-detail';
 import { Movies } from './pages/movies/movies';
 import { NotFound } from './pages/not-found/not-found';
-import { Tutorial } from './pages/tutorial/tutorial';
 import { Welcome } from './pages/welcome/welcome';
 
 // Detail routes take an "id-slug" segment (e.g. /movies/429617-spider-man-far-from-home).
@@ -20,6 +19,5 @@ export const routes: Routes = [
   { path: 'actors/:id', component: ActorDetail },
   { path: 'about', component: About, title: 'About · MoviesApp' },
   { path: 'contact', component: Contact, title: 'Contact · MoviesApp' },
-  { path: 'tutorial', component: Tutorial, title: 'Tutorial · MoviesApp' },
   { path: '**', component: NotFound, title: 'Not found · MoviesApp' },
 ];
