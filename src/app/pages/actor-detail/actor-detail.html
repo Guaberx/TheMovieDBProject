@@ -28,10 +28,10 @@
     </div>
   </div>
 
-  <div class="outer pb-5">
+  <div class="container pb-5">
     @if (movies().length) {
       <h2 class="h3 text-white"><b>Movies from this Actor:</b></h2>
-      <div class="inner">
+      <div class="card-grid">
         @for (movie of movies(); track movie.id) {
           <app-poster-card
             [imagePath]="movie.poster_path"

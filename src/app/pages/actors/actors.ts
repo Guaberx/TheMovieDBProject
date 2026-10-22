@@ -11,9 +11,9 @@ import { PosterCard } from '../../shared/poster-card/poster-card';
   imports: [PosterCard, Loading, LoadError],
   template: `
     @if (actors.hasValue()) {
-      <div class="outer padtop-5 pb-5">
+      <div class="container padtop-5 pb-5">
         <h1 class="visually-hidden">Popular actors</h1>
-        <div class="inner">
+        <div class="card-grid">
           @for (actor of actors.value().results; track actor.id) {
             <app-poster-card
               [imagePath]="actor.profile_path"

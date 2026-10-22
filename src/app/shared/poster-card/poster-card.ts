@@ -25,7 +25,7 @@ export class PosterCard {
   readonly link = input<unknown[]>();
   readonly big = input(false);
 
-  // Cards render about 160px wide, so the browser picks 185px or 342px (high-DPI) images.
+  // Cards render 150-180px wide, so the browser picks 185px or 342px (high-DPI) images.
   // The big detail-page poster always uses the 500px version.
   protected readonly src = computed(() => this.imageUrl('w500'));
   protected readonly srcset = computed(() =>

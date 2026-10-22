@@ -17,30 +17,39 @@ app-root > section{
     }
 }
 
+//Welcome screen: red bar on the left, big title, and a "Watch" button below it
 .startbtn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12vh;
+    min-height: 100vh;
+    padding: 56px 1rem 0;
+    border-left: 12vw solid rgba(255, 0, 0, .7);
+    color: white;
+    text-decoration: none;
     animation-name:appear;
     animation-duration:1s;
     animation-fill-mode:forwards;
-}
-.startbtn:hover{
-    cursor: pointer;
-}
-
-.startbtn{
-    display: block;
-    position: relative;
-    bottom: 1em;
-    left: 1em;
-    background-color: rgba(255, 0, 0, .7);
-    padding-left: 20px;
-    padding-right: 2px;
-    
-    width: 10em;
-    height: 40em;
-    p{
+    &:hover, &:focus{
         color: white;
-        text-align: center;
+        .welcome-watch{
+            background-color: rgba(255, 0, 0, .85);
+        }
     }
+}
+.welcome-title{
+    margin: 0;
+    font-size: min(13vw, 22vh);
+    font-weight: 400;
+    line-height: 1;
+}
+.welcome-watch{
+    padding: .1em .8em;
+    border-radius: 15px;
+    background-color: rgba(255, 0, 0, .7);
+    font-size: max(4vw, 1.5rem);
 }
 
 .searchButton{
@@ -50,14 +59,14 @@ app-root > section{
     white-space: nowrap;
     cursor: pointer;
     background-color: rgba(255,0,0,0.7);
-    height: 5vh;
-    width: auto;
-    margin: 0 auto;
-    padding: 0 auto;
+    //Same height as Bootstrap's .form-control so it lines up with the search box
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
     text-align: center;
-    font-family: Helvetica;
-    font-size: 3vh;
-    line-height: 5vh;
+    &:hover{
+        background-color: rgba(255,0,0,0.85);
+    }
 }
 
 .rounding{
@@ -80,7 +89,11 @@ footer{
     //Positioned so it paints over the welcome page's red bar
     position: relative;
     a{
+        color: white;
         text-decoration: none;
+        &:hover, &:focus{
+            color: rgb(255, 60, 60);
+        }
     }
 }
 
@@ -93,49 +106,35 @@ footer{
 }
 
 
-//Este contiene todos los posters de las peliculas dando los margenes de forma responsive
-div.outer{
-    width:70vw;
-    margin: 0 auto;
-    // background-color: #66ffff;
-}
-
-//Este tambien contiene todos los posters pero es utilizado para centrar los posters
-div.inner{
-    display: inline-table;
-    margin: 0 auto;   
+//Grid of posters or profile photos. Columns stretch to fill the .container, so the cards line up
+//with the headings and the detail-page poster; phones get two columns.
+.card-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
     animation-name:appear;
     animation-duration:1s;
     animation-fill-mode:backwards;
+    @media (max-width: 575.98px){
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
 }
 
-//Todas las propiedades de cada poster o foto de persona en el sitio
+//Poster or profile photo, used by the cards and the detail/contact pages
 .poster{
-    vertical-align: top;
-    display: inline-table;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
-    width: 12em;
+    display: block;
     position: relative;
-    // border: 1px solid #CCC;
-    //Esto es para que las imagenes sean del tamaño del div
     img{
+        display: block;
         border-radius: 15px;
         border: 2px solid rgba(53, 59, 43, 0.384);
-        background-size: cover;
-        position: relative;
         max-width:100%;
-        max-height:100%;
-        // float: left;
-        
     }
     a{
+        display: block;
         text-decoration: none;
-    }
-    p{
-        position: absolute;
     }
 }
 
@@ -168,17 +167,19 @@ app-poster-card img{
     color: rgba(255, 0, 0, 0.7);
 }
 
-//El texto con la puntuacion de la pelicula cuando estan todas las miniaturas
+//Rating badge in the poster's top-left corner
 .text-block-top {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: rgb(255, 255, 255);
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 15px;
+    top: .5rem;
+    left: .5rem;
+    padding: 0 .5rem;
+    background-color: rgba(0, 0, 0, 0.65);
+    border-radius: 10px;
     color: #FFD700;
+    .h2{
+        margin: 0;
+        font-size: 1.5rem;
+    }
 }
 
 //Color para distinguir la puntuacion
@@ -186,25 +187,31 @@ app-poster-card img{
     color: #FFD700;
 }
 
-//El texto con el titulo de la pelicula cuando estan todas las miniaturas
+//Title along the bottom of the poster, at most two lines
 .text-block-bot {
     position: absolute;
-    bottom: 1em;
-    left: 1em;
-    background-color: rgba(0, 0, 0, .7);
-    padding-left: 2px;
-    padding-right: 2px;
-    border-radius: 15px;
-    width: 10em;
-    height: 4em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.5rem .5rem .5rem;
+    border-radius: 0 0 15px 15px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .9) 45%);
     p{
+        margin: 0;
         color: white;
         text-align: center;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
     }
-  }
+}
 
 //Animaciones
 app-poster-card.animated:hover{
+    z-index: 1;
     animation-name:bigger;
     animation-duration:1s;
     animation-timing-function: ease;
@@ -213,7 +220,9 @@ app-poster-card.animated:hover{
 
 // Detail-page poster
 .poster.big{
-    width: 20em;    
+    width: 20em;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
 }
 
 @keyframes appear {
@@ -236,4 +245,93 @@ app-poster-card.animated:hover{
     0% {
 		transform: scale(1);
 	}
+}
+
+//Centered message for the 404 page, load errors and empty search results
+.empty-state{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 8rem 1rem 2rem;
+    p{
+        text-align: center;
+        color: rgba(255, 255, 255, .75);
+    }
+    .searchButton{
+        text-decoration: none;
+    }
+}
+.empty-state-inline{
+    min-height: 0;
+    padding-top: 3rem;
+}
+.empty-state-code{
+    margin: 0;
+    font-size: min(30vw, 9rem);
+    font-weight: 700;
+    line-height: 1;
+    color: rgba(255, 0, 0, .7) !important;
+}
+
+//Text pages (About)
+.page-text{
+    max-width: 760px;
+    p, li{
+        color: rgba(255, 255, 255, .85);
+        text-align: left;
+    }
+    a{
+        color: white;
+        text-decoration-color: rgba(255, 0, 0, .7);
+        text-underline-offset: 3px;
+        &:hover{
+            color: rgb(255, 60, 60);
+        }
+    }
+}
+.feature-list{
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, .85);
+    li::marker{
+        color: rgba(255, 0, 0, .7);
+    }
+}
+.credit-box{
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 4px solid rgba(255, 0, 0, .7);
+    border-radius: 0 15px 15px 0;
+    background-color: rgba(255, 255, 255, .05);
+}
+
+//Contact: round photo next to the name, stacked on phones
+.profile{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    max-width: 760px;
+    margin: 0 auto;
+    @media (max-width: 575.98px){
+        flex-direction: column;
+        text-align: center;
+        .feature-list{
+            text-align: left;
+        }
+    }
+}
+.profile-photo{
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 25%;
+    border: 4px solid rgba(255, 0, 0, .7);
+}
+.profile-role{
+    color: rgba(255, 255, 255, .65);
+    text-align: inherit;
 }

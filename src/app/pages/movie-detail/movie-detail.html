@@ -33,9 +33,9 @@
   </div>
 
   @if (cast().length) {
-    <div class="outer">
+    <div class="container">
       <h2 class="h3 text-white"><b>Cast:</b></h2>
-      <div class="inner">
+      <div class="card-grid">
         @for (actor of cast(); track actor.id) {
           <app-poster-card
             [imagePath]="actor.profile_path"
@@ -47,10 +47,10 @@
     </div>
   }
 
-  <div class="outer pb-5">
+  <div class="container pb-5">
     @if (similarMovies().length) {
       <h2 class="h3 text-white"><b>You may also like:</b></h2>
-      <div class="inner">
+      <div class="card-grid">
         @for (s of similarMovies(); track s.id) {
           <app-poster-card
             [imagePath]="s.poster_path"
