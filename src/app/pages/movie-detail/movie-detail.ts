@@ -1,7 +1,9 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, computed, effect, inject, input } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { runtime, year } from '../../core/format';
 import { isNotFound } from '../../core/http-errors';
 import { valueOrUndefined } from '../../core/resource';
 import { TmdbApi } from '../../core/tmdb-api';
@@ -13,7 +15,7 @@ import { NotFound } from '../not-found/not-found';
 
 @Component({
   selector: 'app-movie-detail',
-  imports: [PosterCard, Loading, LoadError, NotFound],
+  imports: [PosterCard, Loading, LoadError, NotFound, DecimalPipe],
   templateUrl: './movie-detail.html',
 })
 export class MovieDetail {
@@ -38,13 +40,15 @@ export class MovieDetail {
     stream: ({ params }) => this.api.similarMovies(params),
   });
 
-  protected readonly cast = computed(() => valueOrUndefined(this.credits)?.cast.slice(0, 5) ?? []);
+  protected readonly cast = computed(() => valueOrUndefined(this.credits)?.cast.slice(0, 6) ?? []);
   protected readonly similarMovies = computed(
-    () => valueOrUndefined(this.similar)?.results.slice(0, 5) ?? [],
+    () => valueOrUndefined(this.similar)?.results.slice(0, 6) ?? [],
   );
 
   protected readonly actorLink = actorLink;
   protected readonly movieLink = movieLink;
+  protected readonly year = year;
+  protected readonly runtime = runtime;
 
   protected readonly notFound = computed(
     () => this.movieId() === undefined || isNotFound(this.movie.error()),

@@ -1,26 +1,36 @@
 @if (actor.hasValue()) {
   @let a = actor.value();
   <div class="container padtop-6">
-    <div class="row">
-      <div class="col-md-auto">
-        <app-poster-card [imagePath]="a.profile_path" [title]="a.name" [big]="true" />
-      </div>
-      <div class="col">
-        <h1 class="h3 text-white">
-          <b>{{ a.name }}</b>
-        </h1>
-        <br />
+    <div class="detail-header">
+      <app-poster-card [imagePath]="a.profile_path" [title]="a.name" [big]="true" />
+      <div class="detail-info">
+        <h1 class="detail-title">{{ a.name }}</h1>
         @if (a.birthday) {
-          <p>
-            {{ a.birthday }}
+          <p class="detail-meta">
+            <span>
+              Born {{ a.birthday | date: 'longDate' }}
+              @if (a.place_of_birth) {
+                in {{ a.place_of_birth }}
+              }
+            </span>
             @if (a.deathday) {
-              &nbsp;-&nbsp; {{ a.deathday }}
+              <span>Died {{ a.deathday | date: 'longDate' }}</span>
             }
           </p>
         }
-        <p><b>Biography:</b></p>
+        <h2 class="detail-label">Biography</h2>
         @if (a.biography) {
-          <p>{{ a.biography }}</p>
+          <p class="biography" [class.collapsed]="longBio() && !bioExpanded()">{{ a.biography }}</p>
+          @if (longBio()) {
+            <button
+              class="link-button"
+              type="button"
+              [attr.aria-expanded]="bioExpanded()"
+              (click)="bioExpanded.set(!bioExpanded())"
+            >
+              {{ bioExpanded() ? 'Show less' : 'Read more' }}
+            </button>
+          }
         } @else {
           <p class="text-white-50">No biography available.</p>
         }
@@ -30,12 +40,13 @@
 
   <div class="container pb-5">
     @if (movies().length) {
-      <h2 class="h3 text-white"><b>Movies from this Actor:</b></h2>
+      <h2 class="section-title">Known for</h2>
       <div class="card-grid">
         @for (movie of movies(); track movie.id) {
           <app-poster-card
             [imagePath]="movie.poster_path"
             [title]="movie.title"
+            [subtitle]="year(movie.release_date)"
             [rating]="movie.vote_average"
             [link]="movieLink(movie)"
           />

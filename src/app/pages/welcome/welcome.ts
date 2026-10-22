@@ -6,8 +6,9 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   template: `
     <a routerLink="/movies" class="startbtn">
-      <h1 class="welcome-title">MoviesApp</h1>
-      <span class="welcome-watch">Watch</span>
+      <h1 class="welcome-title">Movies<span class="brand-accent">App</span></h1>
+      <span class="welcome-tagline">Discover popular movies and the people behind them</span>
+      <span class="welcome-watch">Watch ▸</span>
     </a>
   `,
 })

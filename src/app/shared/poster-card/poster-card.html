@@ -1,28 +1,36 @@
 @if (link(); as link) {
   <a
+    class="poster-link"
     [routerLink]="link"
     (pointerenter)="hoverStart()"
     (pointerleave)="hoverEnd()"
     (pointerdown)="prefetchNow()"
     (focus)="prefetchNow()"
   >
-    <ng-container [ngTemplateOutlet]="image" />
-    @if (rating() !== undefined) {
-      <div class="text-block-top">
-        <div class="h2">{{ rating() | number: '1.1-1' }}</div>
-      </div>
-    }
-    <div class="text-block-bot">
-      <p>{{ title() }}</p>
+    <div class="poster-frame">
+      <ng-container [ngTemplateOutlet]="image" />
+      @if (rating()) {
+        <span class="rating-badge">
+          <span aria-hidden="true">★</span>
+          <span class="visually-hidden">Rating</span>
+          {{ rating() | number: '1.1-1' }}
+        </span>
+      }
     </div>
+    <span class="poster-title">{{ title() }}</span>
+    @if (subtitle()) {
+      <span class="poster-subtitle">{{ subtitle() }}</span>
+    }
   </a>
 } @else {
-  <ng-container [ngTemplateOutlet]="image" />
+  <div class="poster-frame">
+    <ng-container [ngTemplateOutlet]="image" />
+  </div>
 }
 
 <ng-template #image>
   @if (imagePath()) {
-    <!-- Linked cards repeat the title in their caption, so their image alt stays empty.
+    <!-- Linked cards show the title under the image, so their image alt stays empty.
          The big detail-page poster is the page's main content, so it gets fetched first. -->
     <img
       [src]="src()"
@@ -31,9 +39,9 @@
       [alt]="link() ? '' : title()"
       [attr.fetchpriority]="big() ? 'high' : null"
     />
+  } @else if (link()) {
+    <div class="poster-placeholder" aria-hidden="true">No image</div>
   } @else {
-    <div class="poster-placeholder" role="img" [attr.aria-label]="title()">
-      <span>{{ title() }}</span>
-    </div>
+    <div class="poster-placeholder" role="img" [attr.aria-label]="title()">No image</div>
   }
 </ng-template>

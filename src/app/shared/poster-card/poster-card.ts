@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Prefetch } from '../../core/prefetch';
 
-/** A poster or profile photo. Linked cards show the overlays and hover effect; unlinked ones are the big detail-page image. */
+/** A poster or profile photo. Linked cards add a title, subtitle, rating and hover effect; unlinked ones are the big detail-page image. */
 @Component({
   selector: 'app-poster-card',
   imports: [RouterLink, NgTemplateOutlet, DecimalPipe],
@@ -21,6 +21,9 @@ export class PosterCard {
 
   readonly imagePath = input<string | null>();
   readonly title = input.required<string>();
+  /** Small line under the title, e.g. the year or the character played. */
+  readonly subtitle = input<string>();
+  /** 0 means TMDB has no votes yet, so no badge is shown. */
   readonly rating = input<number>();
   readonly link = input<unknown[]>();
   readonly big = input(false);

@@ -1,9 +1,9 @@
 @if (movies.hasValue()) {
   <div class="container padtop-5 pb-5">
     @if (query()) {
-      <h1 class="h3 text-white pt-3">Results for “{{ query() }}”</h1>
+      <h1 class="page-title">Results for “{{ query() }}”</h1>
     } @else {
-      <h1 class="visually-hidden">Popular movies</h1>
+      <h1 class="page-title">Popular movies</h1>
     }
     @if (movies.value().results.length) {
       <div class="card-grid">
@@ -11,6 +11,7 @@
           <app-poster-card
             [imagePath]="movie.poster_path"
             [title]="movie.title"
+            [subtitle]="year(movie.release_date)"
             [rating]="movie.vote_average"
             [link]="movieLink(movie)"
           />

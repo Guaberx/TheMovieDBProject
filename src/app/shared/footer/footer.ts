@@ -6,13 +6,12 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   template: `
     <footer class="page-footer">
-      <div class="text-center py-3">
-        <span class="text-white">Developed by: </span>
-        <a routerLink="/contact"><b>Juan Fernando Otoya</b></a>
-      </div>
-      <div class="text-center py-2">
-        <span class="text-white">© 2019 Copyright:</span>
-        <a routerLink="/"> MoviesApp.com</a>
+      <div class="container footer-inner">
+        <span>
+          © 2019 <a routerLink="/">MoviesApp</a> · Developed by
+          <a routerLink="/contact">Juan Fernando Otoya</a>
+        </span>
+        <span>Movie data from <a href="https://www.themoviedb.org/">TMDB</a></span>
       </div>
     </footer>
   `,

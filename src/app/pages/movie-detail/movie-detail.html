@@ -1,32 +1,52 @@
 @if (movie.hasValue()) {
   @let m = movie.value();
   <div class="container padtop-6">
-    <div class="row">
-      <div class="col-md-auto">
-        <app-poster-card [imagePath]="m.poster_path" [title]="m.title" [big]="true" />
-      </div>
-      <div class="col">
-        <h1 class="h3 text-white">
-          <b>{{ m.title }}</b>
-        </h1>
+    <div class="detail-header">
+      <app-poster-card [imagePath]="m.poster_path" [title]="m.title" [big]="true" />
+      <div class="detail-info">
+        <h1 class="detail-title">{{ m.title }}</h1>
         @if (m.original_title !== m.title) {
-          <p class="text-white-50 mb-0">{{ m.original_title }}</p>
+          <p class="detail-original-title">{{ m.original_title }}</p>
         }
-        <br />
-        <p class="h3 text-white">
-          <span class="goldcolor">{{ m.vote_average.toFixed(1) }}</span> out of 10
-        </p>
-        <p>
-          <b>Languages: </b>
-          @for (lang of m.spoken_languages; track lang.name) {
-            {{ lang.english_name }}{{ $last ? '' : ', ' }}
+        <p class="detail-meta">
+          @if (year(m.release_date); as y) {
+            <span>{{ y }}</span>
+          }
+          @if (runtime(m.runtime); as r) {
+            <span>{{ r }}</span>
+          }
+          @if (m.vote_average) {
+            <span class="detail-rating">
+              <span aria-hidden="true">★</span> {{ m.vote_average | number: '1.1-1' }}
+              <span class="detail-rating-max">/ 10</span>
+            </span>
+          } @else {
+            <span>Not rated yet</span>
           }
         </p>
-        <p><b>Overview:</b></p>
+        @if (m.genres.length) {
+          <ul class="chips" aria-label="Genres">
+            @for (genre of m.genres; track genre.id) {
+              <li>{{ genre.name }}</li>
+            }
+          </ul>
+        }
+        @if (m.tagline) {
+          <p class="detail-tagline">{{ m.tagline }}</p>
+        }
+        <h2 class="detail-label">Overview</h2>
         @if (m.overview) {
           <p>{{ m.overview }}</p>
         } @else {
           <p class="text-white-50">No overview available.</p>
+        }
+        @if (m.spoken_languages.length) {
+          <h2 class="detail-label">Languages</h2>
+          <p>
+            @for (lang of m.spoken_languages; track lang.name) {
+              {{ lang.english_name }}{{ $last ? '' : ', ' }}
+            }
+          </p>
         }
       </div>
     </div>
@@ -34,12 +54,13 @@
 
   @if (cast().length) {
     <div class="container">
-      <h2 class="h3 text-white"><b>Cast:</b></h2>
+      <h2 class="section-title">Cast</h2>
       <div class="card-grid">
         @for (actor of cast(); track actor.id) {
           <app-poster-card
             [imagePath]="actor.profile_path"
             [title]="actor.name"
+            [subtitle]="actor.character"
             [link]="actorLink(actor)"
           />
         }
@@ -49,12 +70,13 @@
 
   <div class="container pb-5">
     @if (similarMovies().length) {
-      <h2 class="h3 text-white"><b>You may also like:</b></h2>
+      <h2 class="section-title">You may also like</h2>
       <div class="card-grid">
         @for (s of similarMovies(); track s.id) {
           <app-poster-card
             [imagePath]="s.poster_path"
             [title]="s.title"
+            [subtitle]="year(s.release_date)"
             [rating]="s.vote_average"
             [link]="movieLink(s)"
           />

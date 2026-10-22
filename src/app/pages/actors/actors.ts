@@ -12,7 +12,7 @@ import { PosterCard } from '../../shared/poster-card/poster-card';
   template: `
     @if (actors.hasValue()) {
       <div class="container padtop-5 pb-5">
-        <h1 class="visually-hidden">Popular actors</h1>
+        <h1 class="page-title">Popular actors</h1>
         <div class="card-grid">
           @for (actor of actors.value().results; track actor.id) {
             <app-poster-card
