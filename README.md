@@ -19,15 +19,17 @@ npm test           # unit tests (Vitest)
 
 ## Routes
 
-| URL                                       | Page                 |
-| ----------------------------------------- | -------------------- |
-| `/`                                       | Welcome              |
-| `/movies`                                 | Popular movies       |
-| `/movies?q=batman`                        | Movie search results |
-| `/movies/429617-spider-man-far-from-home` | Movie details        |
-| `/actors`                                 | Popular actors       |
-| `/actors/1136406-tom-holland`             | Actor details        |
-| `/about`, `/contact`                      | Static pages         |
+| URL                                       | Page                                    |
+| ----------------------------------------- | --------------------------------------- |
+| `/`                                       | Welcome                                 |
+| `/movies`                                 | Popular movies                          |
+| `/movies?genre=28`                        | Popular movies in one genre             |
+| `/movies?q=batman`                        | Search results (matching actors first)  |
+| `/movies/429617-spider-man-far-from-home` | Movie details                           |
+| `/actors`                                 | Popular actors                          |
+| `/actors?q=tom`                           | Actor search results                    |
+| `/actors/1136406-tom-holland`             | Actor details                           |
+| `/about`, `/contact`                      | Static pages                            |
 
 Detail URLs use an `id-slug` segment. Only the numeric id is used for lookups; a missing or outdated slug is replaced with the canonical one.
 

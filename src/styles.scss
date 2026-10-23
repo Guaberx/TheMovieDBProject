@@ -272,6 +272,53 @@ footer{
     }
 }
 
+//Genre links above the movie list; one scrollable row on phones
+.genre-filter{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: -.5rem 0 2rem;
+    @media (max-width: 575.98px){
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin-right: calc(var(--bs-gutter-x) * -.5);
+        padding-bottom: .25rem;
+        scrollbar-width: none;
+    }
+}
+.genre-chip{
+    flex-shrink: 0;
+    padding: .3rem .9rem;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, .85);
+    font-size: .875rem;
+    text-decoration: none;
+    transition: background-color .15s ease, border-color .15s ease;
+    &:hover{
+        border-color: rgba(255, 255, 255, .5);
+        color: white;
+    }
+    &.active{
+        border-color: var(--accent);
+        background-color: var(--accent);
+        color: white;
+    }
+}
+
+//"See all actors" link under the actor row of the search results
+.see-all{
+    margin: -1.5rem 0 2.5rem;
+    a{
+        color: var(--accent-text);
+        font-weight: 600;
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+
 .poster{
     display: block;
     position: relative;

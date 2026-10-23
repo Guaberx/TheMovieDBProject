@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {
+  Genre,
   MovieCredits,
   MovieDetails,
   MovieSummary,
@@ -34,6 +35,20 @@ export class TmdbApi {
     return this.get('movie/popular', pageParam(page));
   }
 
+  /** Popular movies in one genre. */
+  moviesByGenre(genreId: number, page = 1): Observable<Paged<MovieSummary>> {
+    return this.get('discover/movie', {
+      with_genres: genreId,
+      sort_by: 'popularity.desc',
+      include_adult: false,
+      ...pageParam(page),
+    });
+  }
+
+  movieGenres(): Observable<{ genres: Genre[] }> {
+    return this.get('genre/movie/list');
+  }
+
   searchMovies(query: string, page = 1): Observable<Paged<MovieSummary>> {
     return this.get('search/movie', { query, include_adult: false, ...pageParam(page) });
   }
@@ -57,6 +72,10 @@ export class TmdbApi {
   // People
   popularPeople(page = 1): Observable<Paged<PersonSummary>> {
     return this.get('person/popular', pageParam(page));
+  }
+
+  searchPeople(query: string, page = 1): Observable<Paged<PersonSummary>> {
+    return this.get('search/person', { query, include_adult: false, ...pageParam(page) });
   }
 
   person(id: number): Observable<PersonDetails> {

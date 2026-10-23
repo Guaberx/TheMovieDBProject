@@ -1,11 +1,51 @@
 @let list = movies.first;
 @if (list.hasValue()) {
   <div class="container padtop-6 pb-5">
-    @if (query()) {
-      <h1 class="page-title">Results for “{{ query() }}”</h1>
-    } @else {
-      <h1 class="page-title">Popular movies</h1>
+    <h1 class="page-title">{{ heading() }}</h1>
+
+    @if (!query() && genreList().length) {
+      <nav class="genre-filter" aria-label="Filter by genre">
+        <a
+          class="genre-chip"
+          routerLink="/movies"
+          [class.active]="!genreId()"
+          [attr.aria-current]="!genreId() ? 'page' : null"
+          >All</a
+        >
+        @for (g of genreList(); track g.id) {
+          <a
+            class="genre-chip"
+            routerLink="/movies"
+            [queryParams]="{ genre: g.id }"
+            [class.active]="g.id === genreId()"
+            [attr.aria-current]="g.id === genreId() ? 'page' : null"
+            >{{ g.name }}</a
+          >
+        }
+      </nav>
     }
+
+    @if (matchingPeople().length) {
+      <h2 class="section-title">Actors</h2>
+      <div class="card-grid card-grid-six">
+        @for (person of matchingPeople(); track person.id) {
+          <app-poster-card
+            [imagePath]="person.profile_path"
+            [title]="person.name"
+            [link]="actorLink(person)"
+          />
+        }
+      </div>
+      @if (morePeople()) {
+        <p class="see-all">
+          <a routerLink="/actors" [queryParams]="{ q: query() }"
+            >See all actors matching “{{ query() }}”</a
+          >
+        </p>
+      }
+      <h2 class="section-title">Movies</h2>
+    }
+
     @if (movies.items().length) {
       <div class="card-grid">
         @for (movie of movies.items(); track movie.id) {

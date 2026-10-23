@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: '', component: Welcome, title: 'MoviesApp' },
   { path: 'movies', component: Movies },
   { path: 'movies/:id', component: MovieDetail },
-  { path: 'actors', component: Actors, title: 'Actors · MoviesApp' },
+  { path: 'actors', component: Actors },
   { path: 'actors/:id', component: ActorDetail },
   { path: 'about', component: About, title: 'About · MoviesApp' },
   { path: 'contact', component: Contact, title: 'Contact · MoviesApp' },

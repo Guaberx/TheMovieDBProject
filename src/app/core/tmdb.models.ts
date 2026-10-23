@@ -16,11 +16,17 @@ export interface MovieSummary {
   popularity?: number;
 }
 
+export interface Genre {
+  id: number;
+  name: string;
+}
+
 export interface MovieDetails extends MovieSummary {
   overview: string;
   tagline: string;
   runtime: number | null;
-  genres: { id: number; name: string }[];
+  backdrop_path: string | null;
+  genres: Genre[];
   spoken_languages: { english_name: string; name: string }[];
 }
 
