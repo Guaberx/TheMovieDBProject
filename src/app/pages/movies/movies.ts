@@ -22,6 +22,7 @@ export class Movies {
   protected readonly query = computed(() => this.q()?.trim() ?? '');
 
   protected readonly movies = pagedResource({
+    key: 'movies',
     params: () => this.query(),
     load: (query, page) =>
       query ? this.api.searchMovies(query, page) : this.api.popularMovies(page),

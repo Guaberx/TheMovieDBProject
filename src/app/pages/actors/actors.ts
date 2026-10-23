@@ -43,6 +43,7 @@ export class Actors {
   private readonly api = inject(TmdbApi);
 
   protected readonly actors = pagedResource({
+    key: 'actors',
     params: () => null,
     load: (_, page) => this.api.popularPeople(page),
     imagePath: (actor) => actor.profile_path,

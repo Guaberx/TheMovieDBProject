@@ -31,6 +31,7 @@ describe('pagedResource', () => {
     query = signal('a');
     list = TestBed.runInInjectionContext(() =>
       pagedResource({
+        key: 'test',
         params: () => query(),
         load: (q, p) => {
           const response = new Subject<Paged<Item>>();
