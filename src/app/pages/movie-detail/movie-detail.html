@@ -58,7 +58,7 @@
   @if (cast().length) {
     <div class="container">
       <h2 class="section-title">Cast</h2>
-      <div class="card-grid">
+      <div class="card-grid card-grid-six">
         @for (actor of cast(); track actor.id) {
           <app-poster-card
             [imagePath]="actor.profile_path"
@@ -74,7 +74,7 @@
   <div class="container pb-5">
     @if (similarMovies().length) {
       <h2 class="section-title">You may also like</h2>
-      <div class="card-grid">
+      <div class="card-grid card-grid-six">
         @for (s of similarMovies(); track s.id) {
           <app-poster-card
             [imagePath]="s.poster_path"

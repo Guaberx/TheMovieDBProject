@@ -255,8 +255,20 @@ footer{
     animation-duration:1s;
     animation-fill-mode:backwards;
     @media (max-width: 575.98px){
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 1.5rem 1rem;
+    }
+}
+
+//The six-card rows on detail pages (cast, similar, known for) always fill whole rows:
+//6 columns on desktop, 3 on tablets, 2 on phones
+.card-grid-six{
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    @media (max-width: 991.98px){
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media (max-width: 575.98px){
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 

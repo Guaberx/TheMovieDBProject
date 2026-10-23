@@ -41,7 +41,7 @@
   <div class="container pb-5">
     @if (movies().length) {
       <h2 class="section-title">Known for</h2>
-      <div class="card-grid">
+      <div class="card-grid card-grid-six">
         @for (movie of movies(); track movie.id) {
           <app-poster-card
             [imagePath]="movie.poster_path"
