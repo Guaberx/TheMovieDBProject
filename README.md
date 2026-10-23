@@ -1,6 +1,6 @@
 # MoviesApp
 
-Browse popular movies and actors from [The Movie Database (TMDB)](https://www.themoviedb.org/), search for movies, and open detail pages with trailers, cast, filmography and similar titles.
+Browse popular movies and actors from [The Movie Database (TMDB)](https://www.themoviedb.org/), search movies and actors, filter by genre, and open detail pages with trailers, cast, filmography and similar titles.
 
 Built with Angular 22 (standalone components, signals, `rxResource`) and Bootstrap 5.
 
@@ -15,7 +15,10 @@ npm install
 npm start          # dev server at http://localhost:4200
 npm run build      # production build in dist/movies-app
 npm test           # unit tests (Vitest)
+npm run e2e        # browser tests (Playwright), see below
 ```
+
+The browser tests in `e2e/` cover the main flows (list → movie → actor → Back, search, genres, trailer, 404) and check that every page lines up with the navbar and footer, on a desktop and a phone viewport. TMDB is mocked, so they run offline. The first time, download a browser with `npx playwright install chromium`, or use one you already have: `PW_CHANNEL=msedge npm run e2e`.
 
 ## Routes
 
