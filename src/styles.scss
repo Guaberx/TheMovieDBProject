@@ -568,9 +568,6 @@ footer{
 
 //The page uses the full .container like every other page; only the text gets a readable width
 .page-text{
-    > *{
-        max-width: 760px;
-    }
     p, li{
         color: rgba(255, 255, 255, .88);
         line-height: 1.65;
@@ -584,6 +581,24 @@ footer{
         }
     }
 }
+
+//About: text on the left, info boxes on the right; stacked below 992px
+.about-grid{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+    gap: 1.5rem 3rem;
+    align-items: start;
+    > div > p{
+        max-width: 70ch;
+    }
+    @media (max-width: 991.98px){
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+.about-aside{
+    display: grid;
+    gap: 1rem;
+}
 .feature-list{
     padding-left: 1.25rem;
     margin-bottom: 1rem;
@@ -593,39 +608,18 @@ footer{
     }
 }
 .credit-box{
-    margin-top: 2rem;
     padding: 1.25rem 1.5rem;
     border-left: 4px solid var(--accent);
     border-radius: 0 12px 12px 0;
     background-color: var(--surface);
-}
-
-//Contact: round photo next to the name, stacked on phones
-.profile{
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    max-width: 760px;
-    @media (max-width: 575.98px){
-        flex-direction: column;
-        text-align: center;
-        .feature-list{
-            text-align: left;
-        }
+    .detail-label{
+        margin-top: 0;
     }
 }
-.profile-photo{
-    width: 200px;
-    height: 200px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    object-fit: cover;
+
+//Contact reuses the detail-page layout; the photo is nearly square, so crop it around the face
+.poster-frame img.profile-photo{
     object-position: 50% 25%;
-    border: 4px solid var(--accent);
-    box-shadow: var(--shadow);
-}
-.profile-role{
-    color: var(--text-muted) !important;
 }
 
 @keyframes appear {
