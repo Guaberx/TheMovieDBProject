@@ -4,6 +4,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { runtime, year } from '../../core/format';
+import { tmdbImage } from '../../core/images';
 import { isNotFound } from '../../core/http-errors';
 import { valueOrUndefined } from '../../core/resource';
 import { TmdbApi } from '../../core/tmdb-api';
@@ -65,6 +66,10 @@ export class MovieDetail {
   protected readonly movieLink = movieLink;
   protected readonly year = year;
   protected readonly runtime = runtime;
+  protected readonly backdrop = tmdbImage;
+  protected backdropSrcset(path: string) {
+    return ['w780', 'w1280'].map((w) => `${tmdbImage(path, w)} ${w.slice(1)}w`).join(', ');
+  }
 
   protected readonly notFound = computed(
     () => this.movieId() === undefined || isNotFound(this.movie.error()),

@@ -411,6 +411,30 @@ footer{
 
 // ---------------------------------------------------------------- Detail pages
 
+//Faded backdrop behind the top of the movie page (and the see-through navbar)
+.detail-backdrop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: min(620px, 80vh);
+    overflow: hidden;
+    pointer-events: none;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 20%;
+        opacity: .3;
+        //Fade into the page background at the bottom
+        mask-image: linear-gradient(to bottom, black 40%, transparent);
+    }
+}
+//Keep the page content above the backdrop
+.detail-backdrop ~ .container{
+    position: relative;
+}
+
 //Poster on the left, info on the right; stacked on phones
 .detail-header{
     display: flex;

@@ -1,5 +1,17 @@
 @if (movie.hasValue()) {
   @let m = movie.value();
+  <!-- Decorative: a faded still from the movie behind the header. The poster stays the main image. -->
+  @if (m.backdrop_path) {
+    <div class="detail-backdrop" aria-hidden="true">
+      <img
+        [src]="backdrop(m.backdrop_path, 'w1280')"
+        [attr.srcset]="backdropSrcset(m.backdrop_path)"
+        sizes="100vw"
+        alt=""
+        fetchpriority="low"
+      />
+    </div>
+  }
   <div class="container padtop-6">
     <div class="detail-header">
       <app-poster-card [imagePath]="m.poster_path" [title]="m.title" [big]="true" />
