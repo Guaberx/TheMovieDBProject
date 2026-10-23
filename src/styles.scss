@@ -152,6 +152,16 @@ footer{
         }
     }
 }
+//TMDB asks for its logo next to the credit; it stays smaller than the site's own brand
+.footer-credit{
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+}
+.tmdb-logo{
+    display: block;
+}
+
 .footer-inner{
     display: flex;
     flex-wrap: wrap;
@@ -676,6 +686,13 @@ footer{
     color: rgba(255, 255, 255, .88);
     li::marker{
         color: var(--accent);
+    }
+}
+.credit-logo{
+    display: inline-block;
+    margin: .35rem 0 .75rem;
+    img{
+        display: block;
     }
 }
 .credit-box{

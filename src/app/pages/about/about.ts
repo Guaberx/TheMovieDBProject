@@ -24,6 +24,9 @@ import { RouterLink } from '@angular/router';
         <aside class="about-aside">
           <div class="credit-box">
             <h2 class="detail-label">Data source</h2>
+            <a href="https://www.themoviedb.org/" class="credit-logo">
+              <img src="tmdb-logo.svg" alt="The Movie Database (TMDB)" width="164" height="21" />
+            </a>
             <p class="mb-0">
               Movie and actor data and images come from
               <a href="https://www.themoviedb.org/">The Movie Database (TMDB)</a>. This product
