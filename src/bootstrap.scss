@@ -1,0 +1,47 @@
+// Only the parts of Bootstrap the app actually uses. The full bootstrap.min.css is 233 kB;
+// add a partial (or a utility key below) here when a template starts using something new.
+
+// Theme: self-hosted Inter (see angular.json) and the site's dark background.
+$font-family-sans-serif: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$body-bg: rgb(26, 29, 31);
+$body-color: #fff;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/type';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/forms/form-control';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/navbar';
+@import 'bootstrap/scss/spinners';
+@import 'bootstrap/scss/helpers';
+
+$utilities: map-get-multiple(
+  $utilities,
+  (
+    'display',
+    'gap',
+    'justify-content',
+    'margin-x',
+    'margin-end',
+    'margin-bottom',
+    'padding-x',
+    'padding-y',
+    'padding-top',
+    'padding-bottom',
+    'color',
+    'text-align',
+    'max-width',
+    'viewport-height'
+  )
+);
+@import 'bootstrap/scss/utilities/api';

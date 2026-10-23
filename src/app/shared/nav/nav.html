@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Movies<span class="brand-accent">App</span></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      aria-controls="navbarContent"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Toggle navigation"
+      (click)="menuOpen.set(!menuOpen())"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent" [class.show]="menuOpen()">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/movies"
+            routerLinkActive="active"
+            [appPrefetch]="prefetchMovies"
+            (click)="menuOpen.set(false)"
+            >Movies</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/actors"
+            routerLinkActive="active"
+            [appPrefetch]="prefetchActors"
+            (click)="menuOpen.set(false)"
+            >Actors</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/about"
+            routerLinkActive="active"
+            (click)="menuOpen.set(false)"
+            >About</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/contact"
+            routerLinkActive="active"
+            (click)="menuOpen.set(false)"
+            >Contact</a
+          >
+        </li>
+      </ul>
+      <form
+        class="search-group"
+        role="search"
+        (submit)="$event.preventDefault(); search(searchInput.value)"
+      >
+        <input
+          #searchInput
+          [value]="query()"
+          class="form-control"
+          type="search"
+          placeholder="Search movies and actors"
+          aria-label="Search movies and actors"
+        />
+        <button class="searchButton" type="submit" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.5" />
+            <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>

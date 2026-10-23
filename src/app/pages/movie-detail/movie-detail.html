@@ -1,0 +1,108 @@
+@if (movie.hasValue()) {
+  @let m = movie.value();
+  <!-- Decorative: a faded still from the movie behind the header. The poster stays the main image. -->
+  @if (m.backdrop_path) {
+    <div class="detail-backdrop" aria-hidden="true">
+      <img
+        [src]="backdrop(m.backdrop_path, 'w1280')"
+        [attr.srcset]="backdropSrcset(m.backdrop_path)"
+        sizes="100vw"
+        alt=""
+        fetchpriority="low"
+      />
+    </div>
+  }
+  <div class="container padtop-6">
+    <div class="detail-header">
+      <app-poster-card [imagePath]="m.poster_path" [title]="m.title" [big]="true" />
+      <div class="detail-info">
+        <h1 class="detail-title">{{ m.title }}</h1>
+        @if (m.original_title !== m.title) {
+          <p class="detail-original-title">{{ m.original_title }}</p>
+        }
+        <p class="detail-meta">
+          @if (year(m.release_date); as y) {
+            <span>{{ y }}</span>
+          }
+          @if (runtime(m.runtime); as r) {
+            <span>{{ r }}</span>
+          }
+          @if (m.vote_average) {
+            <span class="detail-rating">
+              <span aria-hidden="true">★</span> {{ m.vote_average | number: '1.1-1' }}
+              <span class="detail-rating-max">/ 10</span>
+            </span>
+          } @else {
+            <span>Not rated yet</span>
+          }
+        </p>
+        @if (m.genres.length) {
+          <ul class="chips" aria-label="Genres">
+            @for (genre of m.genres; track genre.id) {
+              <li>{{ genre.name }}</li>
+            }
+          </ul>
+        }
+        @if (trailer(); as t) {
+          <app-trailer [videoKey]="t.key" [title]="m.title + ' trailer'" />
+        }
+        @if (m.tagline) {
+          <p class="detail-tagline">{{ m.tagline }}</p>
+        }
+        <h2 class="detail-label">Overview</h2>
+        @if (m.overview) {
+          <p>{{ m.overview }}</p>
+        } @else {
+          <p class="text-white-50">No overview available.</p>
+        }
+        @if (m.spoken_languages.length) {
+          <h2 class="detail-label">Languages</h2>
+          <p>
+            @for (lang of m.spoken_languages; track lang.name) {
+              {{ lang.english_name }}{{ $last ? '' : ', ' }}
+            }
+          </p>
+        }
+      </div>
+    </div>
+  </div>
+
+  @if (cast().length) {
+    <div class="container">
+      <h2 class="section-title">Cast</h2>
+      <div class="card-grid card-grid-six">
+        @for (actor of cast(); track actor.id) {
+          <app-poster-card
+            [imagePath]="actor.profile_path"
+            [title]="actor.name"
+            [subtitle]="actor.character"
+            [link]="actorLink(actor)"
+          />
+        }
+      </div>
+    </div>
+  }
+
+  <div class="container pb-5">
+    @if (similarMovies().length) {
+      <h2 class="section-title">You may also like</h2>
+      <div class="card-grid card-grid-six">
+        @for (s of similarMovies(); track s.id) {
+          <app-poster-card
+            [imagePath]="s.poster_path"
+            [title]="s.title"
+            [subtitle]="year(s.release_date)"
+            [rating]="s.vote_average"
+            [link]="movieLink(s)"
+          />
+        }
+      </div>
+    }
+  </div>
+} @else if (notFound()) {
+  <app-not-found />
+} @else if (movie.error()) {
+  <app-load-error (retry)="retry()" />
+} @else {
+  <app-loading />
+}
