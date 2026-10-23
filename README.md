@@ -6,11 +6,11 @@ Built with Angular 22 (standalone components, signals, `rxResource`) and Bootstr
 
 **Live:** https://themoviedbproject.web.app
 
-| Popular movies | Movie page |
-| --- | --- |
+| Popular movies                                                    | Movie page                                                                       |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | ![Popular movies with genre filters](docs/screenshots/movies.jpg) | ![Movie page with backdrop, cast and trailer button](docs/screenshots/movie.jpg) |
-| **Search (actors and movies)** | **Actor page on a phone** |
-| ![Search results for "tom"](docs/screenshots/search.jpg) | ![Actor page on a phone](docs/screenshots/actor-phone.jpg) |
+| **Search (actors and movies)**                                    | **Actor page on a phone**                                                        |
+| ![Search results for "tom"](docs/screenshots/search.jpg)          | ![Actor page on a phone](docs/screenshots/actor-phone.jpg)                       |
 
 ## Requirements
 
@@ -30,17 +30,17 @@ The browser tests in `e2e/` cover the main flows (list → movie → actor → B
 
 ## Routes
 
-| URL                                       | Page                                    |
-| ----------------------------------------- | --------------------------------------- |
-| `/`                                       | Welcome                                 |
-| `/movies`                                 | Popular movies                          |
-| `/movies?genre=28`                        | Popular movies in one genre             |
-| `/movies?q=batman`                        | Search results (matching actors first)  |
-| `/movies/429617-spider-man-far-from-home` | Movie details                           |
-| `/actors`                                 | Popular actors                          |
-| `/actors?q=tom`                           | Actor search results                    |
-| `/actors/1136406-tom-holland`             | Actor details                           |
-| `/about`, `/contact`                      | Static pages                            |
+| URL                                       | Page                                   |
+| ----------------------------------------- | -------------------------------------- |
+| `/`                                       | Welcome                                |
+| `/movies`                                 | Popular movies                         |
+| `/movies?genre=28`                        | Popular movies in one genre            |
+| `/movies?q=batman`                        | Search results (matching actors first) |
+| `/movies/429617-spider-man-far-from-home` | Movie details                          |
+| `/actors`                                 | Popular actors                         |
+| `/actors?q=tom`                           | Actor search results                   |
+| `/actors/1136406-tom-holland`             | Actor details                          |
+| `/about`, `/contact`                      | Static pages                           |
 
 Detail URLs use an `id-slug` segment. Only the numeric id is used for lookups; a missing or outdated slug is replaced with the canonical one.
 
