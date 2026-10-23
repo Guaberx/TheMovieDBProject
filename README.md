@@ -4,6 +4,14 @@ Browse popular movies and actors from [The Movie Database (TMDB)](https://www.th
 
 Built with Angular 22 (standalone components, signals, `rxResource`) and Bootstrap 5.
 
+**Live:** https://themoviedbproject.web.app
+
+| Popular movies | Movie page |
+| --- | --- |
+| ![Popular movies with genre filters](docs/screenshots/movies.jpg) | ![Movie page with backdrop, cast and trailer button](docs/screenshots/movie.jpg) |
+| **Search (actors and movies)** | **Actor page on a phone** |
+| ![Search results for "tom"](docs/screenshots/search.jpg) | ![Actor page on a phone](docs/screenshots/actor-phone.jpg) |
+
 ## Requirements
 
 Node.js `^22.22.3`, `^24.15.0` or `>=26`.
