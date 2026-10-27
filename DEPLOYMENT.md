@@ -63,12 +63,15 @@ If something goes wrong, go to the Firebase console → Hosting → release hist
 
 ## Moving it to the right project
 
-Hosting site names are unique across all of Firebase, so `themoviedbproject` can only exist in one project at a time. Choose one of these options:
+**Decision (2026-10):** leave it where it is for now. Everything works from `monedarapida`; it's only untidy in the console. If the project takes off, add a custom domain instead (see below), which makes the question moot.
 
-1. **Keep the name and move it.** Delete the `themoviedbproject` site from MonedaRapida, then create it again in MovieDBProject with `firebase hosting:sites:create themoviedbproject --project moviedbproject-f4847`. Check Firebase's current docs before deleting: a deleted site name might not be reusable right away, and the URL is down between the two steps.
-2. **Use MovieDBProject's own site.** Deploy to `moviedbproject-f4847.web.app` (or a custom domain added to that project). Then point the old site at it with a redirect in a separate deploy to MonedaRapida.
+What's possible, for when that happens:
 
-Either way, update `.firebaserc` afterwards:
+- **The site itself can't move.** Firebase has no way to transfer a Hosting site between projects, and a deleted site name can never be reused. So deleting `themoviedbproject` to recreate it elsewhere would lose `themoviedbproject.web.app` for good. Don't.
+- **Renaming projects is only cosmetic.** Display names can be changed in Project settings, but project IDs are permanent and nothing moves. MonedaRapida also holds other sites, so renaming it would just mislabel those.
+- **A custom domain can move.** Buy a domain and add it to MovieDBProject (Hosting → Add custom domain, then set the DNS records it shows). Deploy there, then turn `themoviedbproject.web.app` into a redirect to the domain with a separate deploy to MonedaRapida. A custom domain can later be removed from one project and added to another; it's briefly down while the new HTTPS certificate is issued.
+
+When deploying to MovieDBProject, update `.firebaserc`:
 
 ```json
 {
